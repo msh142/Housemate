@@ -210,13 +210,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="img\a67a34a7e60c2f00db7014a1717d0466.jpg" />
     <Content Include="img\Asset.jpg" />
-    <Content Include="img\bscvirtualandaugmentedreality-1200x400.jpg" />
-    <Content Include="img\cmz_3color_full_image-1200x400.jpg" />
-    <Content Include="img\Header-FITbanking-Philosophy-1200x400.jpg" />
+    <Content Include="img\carousel\lkdwebsite_banner2_1800x.jpg" />
+    <Content Include="img\carousel\lkdwebsite_banner_1800x.jpg" />
+    <Content Include="img\carousel\Sale_banner_2_1200x.jpg" />
     <Content Include="img\Housemate Logo.png" />
-    <Content Include="img\icecube-panorama--1200x400.jpg" />
     <Content Include="img\products\product1.jpg" />
     <Content Include="img\products\product2.jpg" />
     <Content Include="img\products\product3.png" />
