@@ -12,7 +12,7 @@ namespace Housemate.Controllers
         // GET: UserAccount
         hmdbEntities db = new hmdbEntities();
         [HttpGet]
-        public ActionResult ViewUser()
+        public ActionResult RegisterUser()
         {
             return View();
         }
