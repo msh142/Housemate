@@ -1,6 +1,6 @@
 ﻿@model Housemate.Models.CustomerInfo
 @{
-    ViewBag.title = "ViewUser";
+    ViewBag.title = "RegisterUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,59 +9,134 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>RegisterUser</title>
+    <title>Register User</title>
+    <style>
+        .left-section {
+            background-color: transparent;
+            width: 1000px;
+        }
+
+        .right-section {
+            font-size: medium;
+            background-color: #FC4F00;
+            height: fit-content;
+            width: fit-content;
+            padding-left:20px;
+            padding-right:20px;
+            padding-bottom:5px;
+            padding-top:5px;
+            margin-top:20px;
+            border-radius: 20px; /* Rounded corners for the right section */
+        }
+
+        .body-content {
+            margin: 0;
+            padding: 0;
+            /* Adding the background image */
+            background-image: url("/img/Asset.jpg");
+            /* Set background image to cover the entire body */
+            background-size: cover;
+            /* Set background image to not repeat */
+            background-repeat: no-repeat;
+        }
+
+        /* Adjust label and input alignment */
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            width: 150px; /* Adjust as needed */
+            font-weight: bold;
+            text-align: left; /* Align labels to the left */
+        }
+
+        .form-control {
+            flex: 1;
+        }
+
+        /* Center align the submit button */
+        .submit-btn-container {
+            display: flex;
+            justify-content: center;
+        }
+
+            .submit-btn-container button {
+                width: 100%;
+                max-width: 200px; /* Adjust as needed */
+            }
+    </style>
 </head>
 <body>
-    <div>
-        @using (Html.BeginForm("RegisterUser", "UserAccount", FormMethod.Post))
-        {
-            <div class="container">
-                <div class="form-group">
-                    <label>Username</label>
-                    @Html.TextBoxFor(model => model.username, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>E-mail</label>
-                    @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>First name</label>
-                    @Html.TextBoxFor(model => model.first_name, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Last name</label>
-                    @Html.TextBoxFor(model => model.last_name, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    @Html.TextBoxFor(model => model.password, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Address</label>
-                    @Html.TextBoxFor(model => model.address, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>City</label>
-                    @Html.TextBoxFor(model => model.city, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>State</label>
-                    @Html.TextBoxFor(model => model.state, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Country</label>
-                    @Html.TextBoxFor(model => model.country, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    @Html.TextAreaFor(model => model.phone_number, new { @class = "form-control", @rows = 10 })
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="container-fluid body-content ">
+        <div class="row">
+            <!-- Left Section: 3/4 -->
+            <div class="col-md-9 left-section d-flex align-items-center justify-content-center">
+                <img src="~/img/Housemate Logo.png" alt="Logo" class="label-primary" style="width:40%; margin:300px" />
+            </div>
+
+            <!-- Right Section: 1/4 -->
+            <div class="col-md-3 right-section">
+                <h2 class="text-center">Register</h2>
+                <form asp-action="Register" method="post">
+                    @using (Html.BeginForm("RegisterUser", "UserAccount", FormMethod.Post))
+                    {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.username, "Username", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.username, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.email, "Email", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.first_name, "First Name", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.first_name, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.last_name, "Last Name", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.last_name, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.password, "Password", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.password, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.address, "Address", new { @class = "form-label" })
+                                @Html.TextAreaFor(model => model.address, new { @class = "form-control", @rows = 3 })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.city, "City", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.city, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.state, "State", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.state, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.country, "Country", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.country, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.phone_number, "Phone Number", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.phone_number, new { @class = "form-control" })
+                            </div>
+                            <div class="submit-btn-container">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                    }
+                </form>
+                <div class="text-center mt-3">
+                    <a href="/Home/Login">Already registered? Log in here</a>
                 </div>
             </div>
-        }
+        </div>
     </div>
 </body>
 </html>
+
+
+
 

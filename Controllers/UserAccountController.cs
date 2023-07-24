@@ -33,7 +33,7 @@ namespace Housemate.Controllers
 
             db.CustomerInfoes.Add(cobj);
             db.SaveChanges();
-            return View("ViewUser");
+            return View("RegisterUser");
         }
 
     }

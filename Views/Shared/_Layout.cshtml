@@ -3,35 +3,103 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Homemate</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        /* Add the following CSS to reset the margin on the body element */
+        .navbar {
+            min-height: 60px;
+            background-color: #053559;
+            color: white;
+        }
+
+        .navbar-brand {
+            padding: 15px 0;
+            height: auto;
+            font-weight: bold;
+        }
+        /* Add custom CSS to style the buttons in the navbar */
+        .btn-navbar {
+            padding-top: 5px;
+            padding-right: 5px;
+            color: white;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="color:black">
+        <div class="container-fluid" style="margin-left:10px; margin-right:10px;">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Homemate", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Furniture", "Category1", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Home Decoration", "Category2", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Kitchen & Dining", "Category3", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Bed & Bath", "Category4", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Appliences", "Category5", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Home Improvement", "Category6", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Outdoor & Garden", "Category7", "Home", new { area = "" }, new { })</li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Home Cleaning", "Service1", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Maintanance & Repairs", "Service2", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Home Security", "Service3", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Home Improvement", "Service4", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Pest Control", "Service5", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Interior Designing & Styling", "Service6", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Moving & Packaging", "Service2", "Home", new { area = "" }, new { })</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { })</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li style="padding-top: 5px; padding-right: 5px;" class="text-white">
+                        @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+                    </li>
+                    <li style="padding-top: 5px; padding-right: 5px;" class="text-white">
+                        @Html.ActionLink("Register", "RegisterUser", "UserAccount", new { area = "" }, new { @class = "btn btn-info" })
+                    </li>
+                    <li style="padding-top: 5px; padding-right: 5px;" class="text-white">
+                        @Html.ActionLink(" ", "Cart", "Home", new { area = "" }, new { @class = "btn btn-danger glyphicon glyphicon-shopping-cart" })
+                    </li>
+                    <li style="padding-top: 5px; padding-right: 5px;" class="text-white">
+                        @Html.ActionLink(" ", "EditProfile", "Home", new { area = "" }, new { @class = "btn btn-warning glyphicon glyphicon-user" })
+                    </li>
+                    <li>
+                        <form class="form-inline my-2 my-lg-0" style="margin-top: 10px;">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+
+
+
+    <div class="container-fluid center-container body-content" >
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer style="text-align:center">
+            <p>&copy; @DateTime.Now.Year - Homemate</p>
         </footer>
     </div>
 
