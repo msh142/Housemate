@@ -1,0 +1,67 @@
+﻿@model Housemate.Models.CustomerInfo
+@{
+    ViewBag.title = "ViewUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RegisterUser</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("RegisterUser", "UserAccount", FormMethod.Post))
+        {
+            <div class="container">
+                <div class="form-group">
+                    <label>Username</label>
+                    @Html.TextBoxFor(model => model.username, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>First name</label>
+                    @Html.TextBoxFor(model => model.first_name, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Last name</label>
+                    @Html.TextBoxFor(model => model.last_name, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    @Html.TextBoxFor(model => model.password, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    @Html.TextBoxFor(model => model.address, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    @Html.TextBoxFor(model => model.city, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    @Html.TextBoxFor(model => model.state, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Country</label>
+                    @Html.TextBoxFor(model => model.country, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    @Html.TextAreaFor(model => model.phone_number, new { @class = "form-control", @rows = 10 })
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
+
