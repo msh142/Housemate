@@ -26,12 +26,6 @@ namespace Housemate.Controllers
 
             return View();
         }
-
-        public ActionResult Register()
-        {
-            ViewBag.Message = "Register page.";
-
-            return View("~/Views/Customer/Register.cshtml");
-        }
+        
     }
 }

@@ -1,35 +1,25 @@
 ﻿@model Housemate.Models.CustomerInfo
 @{
-    ViewBag.title = "RegisterUser";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/RegisterLogin.cshtml";
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Register User</title>
+    <title>Login</title>
+
     <style>
-        .left-section {
-            background-color: transparent;
-            width: 1000px;
-        }
-
-        .right-section {
-            font-size: medium;
-            background-color: #FC4F00;
+        .center-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             height: fit-content;
-            width: fit-content;
-            padding-left:20px;
-            padding-right:20px;
-            padding-bottom:5px;
-            padding-top:5px;
-            margin-top:20px;
-            border-radius: 20px; /* Rounded corners for the right section */
         }
 
-        .body-content {
+        body {
+            padding: 20px;
             margin: 0;
             padding: 0;
             /* Adding the background image */
@@ -38,105 +28,135 @@
             background-size: cover;
             /* Set background image to not repeat */
             background-repeat: no-repeat;
+            /* Apply blur effect to the background image */
+            backdrop-filter: blur(5px);
         }
 
-        /* Adjust label and input alignment */
-        .form-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+        .form-control,
+        .btn {
+            border-radius: 10px; /* Adjust the radius value as needed */
         }
-
-        .form-label {
-            width: 150px; /* Adjust as needed */
-            font-weight: bold;
-            text-align: left; /* Align labels to the left */
-        }
-
-        .form-control {
-            flex: 1;
-        }
-
-        /* Center align the submit button */
-        .submit-btn-container {
-            display: flex;
-            justify-content: center;
-        }
-
-            .submit-btn-container button {
-                width: 100%;
-                max-width: 200px; /* Adjust as needed */
-            }
     </style>
+    <link rel="stylesheet" type="text/css" href="~/CSS/navbar.css" />
 </head>
 <body>
-    <div class="container-fluid body-content ">
-        <div class="row">
-            <!-- Left Section: 3/4 -->
-            <div class="col-md-9 left-section d-flex align-items-center justify-content-center">
-                <img src="~/img/Housemate Logo.png" alt="Logo" class="label-primary" style="width:40%; margin:300px" />
-            </div>
-
-            <!-- Right Section: 1/4 -->
-            <div class="col-md-3 right-section">
-                <h2 class="text-center">Register</h2>
-                <form asp-action="Register" method="post">
-                    @using (Html.BeginForm("RegisterUser", "UserAccount", FormMethod.Post))
-                    {
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.username, "Username", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.username, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.email, "Email", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.first_name, "First Name", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.first_name, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.last_name, "Last Name", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.last_name, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.password, "Password", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.password, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.address, "Address", new { @class = "form-label" })
-                                @Html.TextAreaFor(model => model.address, new { @class = "form-control", @rows = 3 })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.city, "City", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.city, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.state, "State", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.state, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.country, "Country", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.country, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.phone_number, "Phone Number", new { @class = "form-label" })
-                                @Html.TextBoxFor(model => model.phone_number, new { @class = "form-control" })
-                            </div>
-                            <div class="submit-btn-container">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                    }
-                </form>
-                <div class="text-center mt-3">
-                    <a href="/Home/Login">Already registered? Log in here</a>
+    <div class="container center-container" style="margin-top: 60px;">
+        <h2>Register</h2>
+        <form asp-action="Register" method="post">
+            @using (Html.BeginForm("RegisterUser", "UserAccount", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        @Html.LabelFor(model => model.username, "Username", new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.username, new { @class = "form-control reg" })
+                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.username, "", new { @class = "" })</h5>
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.email, "Email", new { @class = "form-label" })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.email, new { @class = "form-control reg" })
+                        <h5 style="color:red; text-align:center;">@Html.ValidationMessageFor(model => model.email, "", new { @class = "" })</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.first_name, "First Name", new { @class = "form-label" })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.first_name, new { @class = "form-control reg" })
+                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.first_name, "", new { @class = "" })</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.last_name, "Last Name", new { @class = "form-label" })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.last_name, new { @class = "form-control reg" })
+                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.last_name, "", new { @class = "" })</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.password, "Password", new { @class = "form-label" })
+                    </div>
+                    <div>
+                        @Html.PasswordFor(model => model.password, new { @class = "form-control reg" })
+                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.password, "", new { @class = "" })</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.con_pass, "Confirm Password", new { @class = "form-label" })
+                    </div>
+                    <div>
+                        @Html.PasswordFor(model => model.con_pass, new { @class = "form-control reg" })
+                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.con_pass, "", new { @class = "" })</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.address, "Address", new { @class = "form-label" })
+                    </div>
+                    <div>
+                        @Html.TextAreaFor(model => model.address, new { @class = "form-control reg", @rows = 3 })
+                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.address, "", new { @class = "" })</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.city, "City", new { @class = "form-label" })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.city, new { @class = "form-control reg" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.state, "State", new { @class = "form-label" })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.state, new { @class = "form-control reg" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.country, "Country", new { @class = "form-label" })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.country, new { @class = "form-control reg" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        @Html.LabelFor(model => model.phone_number, "Phone Number", new { @class = "form-label" })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.phone_number, new { @class = "form-control reg" })
+                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "" })</h5>
+                    </div>
+                </div>
+                <div class="submit-btn-container">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            }
+        </form>
+        <div class="text-center mt-3">
+            <a href="/Home/Login">Already registered? Log in here</a>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-
 
 
 

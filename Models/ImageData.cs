@@ -12,14 +12,12 @@ namespace Housemate.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CustomerLogin
+    public partial class ImageData
     {
-        public int login_id { get; set; }
+        public int image_id { get; set; }
         public Nullable<int> customer_id { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public Nullable<System.DateTime> date_time { get; set; }
-    
-        public virtual CustomerInfo CustomerInfo { get; set; }
+        public Nullable<int> product_id { get; set; }
+        public Nullable<int> service_id { get; set; }
+        public string image_data { get; set; }
     }
 }

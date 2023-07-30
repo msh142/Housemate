@@ -1,0 +1,58 @@
+﻿.left-section {
+    background-color: transparent;
+    width: 1000px;
+}
+
+.right-section {
+    font-size: medium;
+    background-color: #e3ba50;
+    height: fit-content;
+    width: fit-content;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-top: 20px;
+    border-radius: 20px; /* Rounded corners for the right section */
+}
+
+.body-content {
+    margin: 0;
+    padding: 0;
+    /* Adding the background image */
+    background-image: url("/img/Asset.jpg");
+    /* Set background image to cover the entire body */
+    background-size: cover;
+    /* Set background image to not repeat */
+    background-repeat: no-repeat;
+}
+
+/* Adjust label and input alignment */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-label {
+    width: 150px; /* Adjust as needed */
+    font-weight: bold;
+    text-align: left; /* Align labels to the left */
+}
+
+.reg {
+    flex: 1;
+    border-radius: 10px;
+}
+
+/* Center align the submit button */
+.submit-btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+    .submit-btn-container button {
+        width: 100%;
+        max-width: 200px; /* Adjust as needed */
+        border-radius: 10px;
+    }

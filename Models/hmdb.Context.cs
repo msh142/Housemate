@@ -33,7 +33,11 @@ namespace Housemate.Models
         public virtual DbSet<Checkout> Checkouts { get; set; }
         public virtual DbSet<CustomerInfo> CustomerInfoes { get; set; }
         public virtual DbSet<CustomerLogin> CustomerLogins { get; set; }
+        public virtual DbSet<ImageData> ImageDatas { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<OrderHistory> OrderHistories { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderStatu> OrderStatus { get; set; }
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
         public virtual DbSet<Product_Category> Product_Category { get; set; }
         public virtual DbSet<Product> Products { get; set; }

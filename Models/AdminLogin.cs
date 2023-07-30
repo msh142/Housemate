@@ -18,6 +18,7 @@ namespace Housemate.Models
         public Nullable<int> admin_id { get; set; }
         public string email { get; set; }
         public string password { get; set; }
+        public Nullable<System.DateTime> date_time { get; set; }
     
         public virtual Admin Admin { get; set; }
     }

@@ -27,6 +27,7 @@ namespace Housemate.Models
             this.Reviews = new HashSet<Review>();
             this.ShippingAddresses = new HashSet<ShippingAddress>();
             this.Wishlists = new HashSet<Wishlist>();
+            this.ImageDatas = new HashSet<ImageData>();
         }
     
         public int customer_id { get; set; }
@@ -40,6 +41,7 @@ namespace Housemate.Models
         public string state { get; set; }
         public string country { get; set; }
         public string phone_number { get; set; }
+        public string con_pass { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BuyHistory> BuyHistories { get; set; }
@@ -61,5 +63,7 @@ namespace Housemate.Models
         public virtual ICollection<ShippingAddress> ShippingAddresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wishlist> Wishlists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImageData> ImageDatas { get; set; }
     }
 }

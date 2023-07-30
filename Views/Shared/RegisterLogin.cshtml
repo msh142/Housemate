@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -42,7 +43,7 @@
         .right-section {
             margin-left: 255px; /* Adjust the margin to account for the width of the left section */
             overflow-x: hidden;
-            width: 1195px;
+            width: fit-content;
         }
 
         .btn-hover {
@@ -153,128 +154,17 @@
 
 
     <div class="container-fluid center-container body-content">
-        <div class="row">
-            <!-- Left Section: 3/4 -->
-            <div class="col-md-3 left-section  d-flex align-items-center justify-content-center" style="margin-top: 60px; background-color: #418171; ">
-                <div style="max-width: 500px; height: 100%; margin-bottom: inherit;">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" style="background-color: #418171; border: 0px ">
-                            <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 22px; margin-left: 20px;margin-top:20px; color: white">--Products--</h4>
-                            <ul style="margin-top: 20px; background-color: #418171; ">
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Furniture</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Home Decor</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Kitchen & Dining</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Bed & Bath</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Appliances</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Home Improvement</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Outdoor & Garden</button>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="list-group-item" style="background-color: #418171; border: 0px ">
-
-                            <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 22px; margin-left: 20px; color: white">--Services--</h4>
-                            <ul style="margin-top: 20px; background-color: #418171; ">
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Home Cleaning</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Maintenance & Repairs</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Home Security</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Home Improvement</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Interior Designing & Styling</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Moving & Packagingt</button>
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    <button class="cat">Pest control</button>
-                                </li>
-
-                            </ul>
-                        </li>
-
-                    </ul>
+        @RenderBody()
+     </div>
+    <footer class="bg-dark text-light py-4">
+        <div class="center-container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2023 Housemate. All rights reserved.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-9 right-section">
-            @RenderBody()
-            <hr />
-            <footer class="bg-dark text-light py-4">
-                <div class="center-container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h3>About Us</h3>
-                            <p>
-                                Welcome to Housemate! We offer a seamless online shopping experience with
-                                a diverse selection of high-quality products at competitive prices.
-                                Our mission is to ensure your satisfaction by providing excellent customer 
-                                service and support. With years of e-commerce experience, we stay ahead of 
-                                the latest trends, offering trendy fashion, cutting-edge gadgets, and practical essentials. 
-                                Trust us for quality, variety, and affordability. Happy Shopping! 
-                                - The Housemate Team
-                            </p>
-                        </div>
-                        <div class="col-md-4">
-                            <h3>Contact Us</h3>
-                            <p>Email: <a href="mailto:info@example.com" class="text-light">info@example.com</a></p>
-                            <p>Phone: +8801xxxxxxxxx</p>
-                        </div>
-                        <div class="col-md-4">
-                            <h3>Follow Us</h3>
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a href="https://www.facebook.com/YourPage" target="_blank">
-                                        <img src="~/img/icons/square-facebook.svg" alt="Facebook" width="30" height="30">
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="https://www.instagram.com/YourPage" target="_blank">
-                                        <img src="~/img/icons/square-instagram.svg" alt="Instagram" width="30" height="30">
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="https://twitter.com/YourPage" target="_blank">
-                                        <img src="~/img/icons/square-twitter.svg" alt="Twitter" width="30" height="30">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <hr/>
-                <div class="center-container">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <p>&copy; 2023 Housemate. All rights reserved.</p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
-
-    </div>
-
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

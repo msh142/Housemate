@@ -1,150 +1,103 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link rel="stylesheet" type="text/css" href="~/CSS/navbar.css" />
 <style>
+    card {
+    }
+
     body {
         background-color: cadetblue;
         background-repeat: no-repeat;
         background-size: cover;
     }
 
-    .card {
-        background-color: cadetblue;
+
+
+    .btn-add-to-cart {
+        background-color: #337ab7;
+        border-color: #2e6da4;
     }
+
+        .btn-add-to-cart:hover,
+        .btn-add-to-cart:focus {
+            background-color: #286090;
+            border-color: #204d74;
+        }
+
+    /* Style for the "Add to Wishlist" button */
+    .btn-add-to-wishlist {
+        background-color: #f0ad4e;
+        border-color: #eea236;
+    }
+
+        .btn-add-to-wishlist:hover,
+        .btn-add-to-wishlist:focus {
+            background-color: #ec971f;
+            border-color: #d58512;
+        }
+
+    /* Style for the "Buy Now" button */
+    .btn-buy-now {
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+
+        .btn-buy-now:hover,
+        .btn-buy-now:focus {
+            background-color: #449d44;
+            border-color: #398439;
+        }
 </style>
 
+
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card" style="max-width: 500px; height:fit-content;margin-left: -30px; margin-bottom:inherit">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <h3>Categories</h3>
-                            <a>Products</a>
-                            <ul>
-                                <li class="list-group-item">
-                                    <a href="#">Category 1</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Category 2</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Category 3</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Category 4</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Category 5</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="list-group-item">
-                            <a>Services</a>
-                            <ul>
-                                <li class="list-group-item">
-                                    <a href="#">Category 1</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Category 2</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Category 3</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Category 4</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Category 5</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <div class="container-fluid body-content ">
+        <div id="imageCarousel" class="carousel slide" data-interval="1800"
+             data-ride="carousel" data-pause="hover" data-wrap="true" style="width: 1210px; height:fit-content; margin-left: -30px;  margin-right: -30px;">
 
-            <div class="col-md-9">
-                <!-- Carousel Section -->
-                <div id="imageCarousel" class="carousel slide" data-interval="2000"
-                     data-ride="carousel" data-pause="hover" data-wrap="true" style="max-width: 1400px; height:fit-content; margin-left: -30px; margin-right: -30px;">
+            <ol class="carousel-indicators">
+                <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#imageCarousel" data-slide-to="1"></li>
+                <li data-target="#imageCarousel" data-slide-to="2"></li>
+            </ol>
 
-                    <ol class="carousel-indicators">
-                        <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#imageCarousel" data-slide-to="1"></li>
-                        <li data-target="#imageCarousel" data-slide-to="2"></li>
-                    </ol>
-
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img src="~/img/carousel/lkdwebsite_banner_1800x.jpg" class="img-responsive" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                                <h3></h3>
-                                <p style="font-weight: bold; color:yellow;font-size:small">Mahesh Chand's S/W Developer Community</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="~/img/carousel/lkdwebsite_banner2_1800x.jpg" class="img-responsive" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                                <h3></h3>
-                                <p style="font-weight: bold; color:yellow;font-size:small">Bill Gates's Software Company</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="~/img/carousel/Sale_banner_2_1200x.jpg" class="img-responsive" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                                <h3></h3>
-                                <p style="font-weight: bold; color:yellow;font-size:small">Larry Page's Search Engine Company</p>
-                            </div>
-                        </div>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="~/img/carousel/lkdwebsite_banner_1800x.jpg" class="img-responsive" style="width: 100%; height: 100%;">
+                    <div class="carousel-caption">
+                        <h3></h3>
+                        <p style="font-weight: bold; color:yellow;font-size:small"></p>
                     </div>
-
-                    <a href="#imageCarousel" class="carousel-control left" data-slide="prev"></a>
-                    <a href="#imageCarousel" class="carousel-control right" data-slide="next"></a>
+                </div>
+                <div class="item">
+                    <img src="~/img/carousel/lkdwebsite_banner2_1800x.jpg" class="img-responsive" style="width: 100%; height: 100%;">
+                    <div class="carousel-caption">
+                        <h3></h3>
+                        <p style="font-weight: bold; color:yellow;font-size:small"></p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="~/img/carousel/Sale_banner_2_1200x.jpg" class="img-responsive" style="width: 100%; height: 100%;">
+                    <div class="carousel-caption">
+                        <h3></h3>
+                        <p style="font-weight: bold; color:yellow;font-size:small"></p>
+                    </div>
                 </div>
             </div>
+
+            <a href="#imageCarousel" class="carousel-control left" data-slide="prev"></a>
+            <a href="#imageCarousel" class="carousel-control right" data-slide="next"></a>
         </div>
+        <div class="container-fluid">
+
+        </div>
+
     </div>
 
 
 
 
-
-    <!-- Main Content -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/350x200" alt="New Arrivals" class="card-img-top">
-                    <div class="card-body">
-                        <h2 class="card-title">New Arrivals</h2>
-                        <p class="card-text">Check out the latest products in our collection.</p>
-                        <a href="@Url.Action("NewArrivals", "Product")" class="btn btn-secondary">View New Arrivals</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/350x200" alt="Best Sellers" class="card-img-top">
-                    <div class="card-body">
-                        <h2 class="card-title">Best Sellers</h2>
-                        <p class="card-text">Discover our top-selling products.</p>
-                        <a href="@Url.Action("BestSellers", "Product")" class="btn btn-secondary">View Best Sellers</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/350x200" alt="Special Offers" class="card-img-top">
-                    <div class="card-body">
-                        <h2 class="card-title">Special Offers</h2>
-                        <p class="card-text">Take advantage of our limited-time offers.</p>
-                        <a href="@Url.Action("SpecialOffers", "Product")" class="btn btn-secondary">View Special Offers</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>

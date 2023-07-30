@@ -172,7 +172,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>hmdb.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImageData.cs">
+      <DependentUpon>hmdb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Order.cs">
+      <DependentUpon>hmdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>hmdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderHistory.cs">
+      <DependentUpon>hmdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatu.cs">
       <DependentUpon>hmdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PaymentMethod.cs">
@@ -206,6 +218,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="CSS\register.css" />
+    <Content Include="CSS\navbar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -215,13 +229,16 @@
     <Content Include="img\carousel\lkdwebsite_banner_1800x.jpg" />
     <Content Include="img\carousel\Sale_banner_2_1200x.jpg" />
     <Content Include="img\Housemate Logo.png" />
+    <Content Include="img\icons\square-facebook.svg" />
+    <Content Include="img\icons\square-instagram.svg" />
+    <Content Include="img\icons\square-twitter.svg" />
     <Content Include="img\products\product1.jpg" />
     <Content Include="img\products\product2.jpg" />
     <Content Include="img\products\product3.png" />
     <Content Include="Models\hmdb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>hmdb.Context.cs</LastGenOutput>
       <DependentUpon>hmdb.edmx</DependentUpon>
+      <LastGenOutput>hmdb.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\hmdb.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -262,11 +279,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\UserAccount\Login.cshtml" />
     <Content Include="Views\UserAccount\RegisterUser.cshtml" />
+    <Content Include="Views\UserAccount\Cart.cshtml" />
+    <Content Include="Views\UserAccount\EditProfile.cshtml" />
+    <Content Include="Views\Shared\RegisterLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="CSS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
