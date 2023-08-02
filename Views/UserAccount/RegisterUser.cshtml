@@ -1,13 +1,13 @@
 ﻿@model Housemate.Models.CustomerInfo
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Register";
     Layout = "~/Views/Shared/RegisterLogin.cshtml";
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Register</title>
 
     <style>
         .center-container {
@@ -48,7 +48,7 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div>
-                        
+
                     </div>
                     <div>
                         @Html.LabelFor(model => model.username, "Username", new { @class = "form-label" })
@@ -141,6 +141,13 @@
                     <div>
                         @Html.TextBoxFor(model => model.phone_number, new { @class = "form-control reg" })
                         <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "" })</h5>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:20px;">
+                    @Html.LabelFor(model => model.image_data, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="ImageFile" id="ImageFile" required />
+                        @Html.ValidationMessageFor(model => model.image_data, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="submit-btn-container">

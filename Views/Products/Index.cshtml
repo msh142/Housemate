@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Housemate.Models.Product>
+
+@{
+    ViewBag.Title = "All Products";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+    /* Add border to the table */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 2px solid black;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2; /* Gray background for table header */
+    }
+</style>
+
+<h2>All Products</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.availability)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image_data)
+        </th>
+        <th> </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.product_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.image_data)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.image_data)
+    </td>
+    <td>
+        @Html.ActionLink("Details", "Details", new { id = item.product_id }, new { @class = "btn btn-primary navbtn" })
+        @Html.ActionLink("Delete", "Delete", new { id = item.product_id }, new { @class = "btn btn-danger navbtn" })
+        @Html.ActionLink("Response", "Response", new { id = item.product_id }, new { @class = "btn btn-success navbtn" })
+    </td>
+</tr>
+}
+
+</table>

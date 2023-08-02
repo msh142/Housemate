@@ -1,7 +1,9 @@
 ﻿using Housemate.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -12,6 +14,55 @@ namespace Housemate.Controllers
     {
         hmdbEntities db = new hmdbEntities();
 
+        public ActionResult Index()
+        {
+            return View(db.CustomerInfoes.ToList());
+        }
+
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CustomerInfo customer = db.CustomerInfoes.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CustomerInfo customer = db.CustomerInfoes.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CustomerInfo customer = db.CustomerInfoes.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+
         [HttpGet]
         public ActionResult RegisterUser()
         {
@@ -19,30 +70,24 @@ namespace Housemate.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterUser(CustomerInfo customer)
+        public ActionResult RegisterUser(CustomerInfo customer, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
-                // Model is valid, proceed with data processing
-                CustomerInfo cobj = new CustomerInfo
+                if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
-                    username = customer.username,
-                    email = customer.email,
-                    first_name = customer.first_name,
-                    last_name = customer.last_name,
-                    address = customer.address,
-                    state = customer.state,
-                    city = customer.city,
-                    password = customer.password,
-                    con_pass = customer.con_pass,
-                    phone_number = customer.phone_number
-                };
-
-                db.CustomerInfoes.Add(cobj);
+                    string filename = Path.GetFileNameWithoutExtension(ImageFile.FileName);
+                    string extension = Path.GetExtension(ImageFile.FileName);
+                    filename = filename + DateTime.Now.ToString("yymmssff") + extension;
+                    customer.image_data = "~/img/customer/" + filename;
+                    filename = Path.Combine(Server.MapPath("~/img/customer/"), filename);
+                    ImageFile.SaveAs(filename);
+                    
+                }
+                db.CustomerInfoes.Add(customer);
                 db.SaveChanges();
-
-                // Redirect to a success page or perform any other action after successful registration
                 return RedirectToAction("Login", "UserAccount");
+                // Redirect to a success page or perform any other action after successful registration
             }
             else
             {

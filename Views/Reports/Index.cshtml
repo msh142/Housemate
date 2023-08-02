@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Housemate.Models.Report>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.report_subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.report_details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.report_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_contact)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.report_subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.report_details)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.report_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer_contact)
+        </td>
+        <td> 
+            @Html.ActionLink("Details", "Details", new { id = item.report_id }, new { @class = "btn btn-primary navbtn" }) 
+            @Html.ActionLink("Delete", "Delete", new { id = item.report_id }, new { @class = "btn btn-danger navbtn" })
+            @Html.ActionLink("Response", "Response", new { id = item.report_id }, new { @class = "btn btn-success navbtn" })
+        </td>
+    </tr>
+}
+
+</table>

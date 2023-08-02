@@ -4,58 +4,51 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ce9078380d1f49d88d59cf2abe85c0d9" Name="Diagram1" ZoomLevel="81">
+      <Diagram DiagramId="bbd5ef37c56f43869ea279159db10f56" Name="Diagram1">
         <EntityTypeShape EntityType="hmdbModel.Admin" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="hmdbModel.AdminLogin" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.BuyHistory" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.Cart" Width="1.5" PointX="6" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.Category" Width="1.5" PointX="3.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.Checkout" Width="1.5" PointX="8.25" PointY="18.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.CustomerInfo" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.CustomerLogin" Width="1.5" PointX="3" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.ImageData" Width="1.5" PointX="6" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.OrderDetail" Width="1.5" PointX="8.25" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.OrderHistory" Width="1.5" PointX="11.25" PointY="22.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.Order" Width="1.5" PointX="6" PointY="22" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.OrderStatu" Width="1.5" PointX="9" PointY="25.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.PaymentMethod" Width="1.5" PointX="3" PointY="31" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.Product_Category" Width="1.5" PointX="6" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.Product" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.Registered" Width="1.5" PointX="3" PointY="34.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.Review" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.Service" Width="1.5" PointX="3.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.ShippingAddress" Width="1.5" PointX="3" PointY="40.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="hmdbModel.Wishlist" Width="1.5" PointX="3" PointY="23.75" IsExpanded="true" />
-        <AssociationConnector Association="hmdbModel.FK__AdminLogi__admin__6442E2C9" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__BuyHistor__custo__7755B73D" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__BuyHistor__produ__7849DB76" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__BuyHistor__servi__793DFFAF" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Cart__customer_i__6AEFE058" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Cart__product_id__6BE40491" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Cart__service_id__6CD828CA" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Checkout__cart_i__73852659" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Product_C__categ__03BB8E22" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Checkout__custom__74794A92" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__CustomerL__custo__6166761E" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Orders__customer__7C1A6C5A" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__PaymentMe__custo__0D44F85C" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Registere__custo__5E8A0973" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Reviews__custome__0697FACD" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__ShippingA__custo__0A688BB1" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Wishlist__custom__6FB49575" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK_Service" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__OrderDeta__order__10216507" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__OrderDeta__produ__11158940" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__OrderDeta__servi__1209AD79" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__OrderHist__order__16CE6296" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__OrderHist__statu__17C286CF" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Orders__product___7D0E9093" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Orders__service___7E02B4CC" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Product_C__produ__02C769E9" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Reviews__product__078C1F06" ManuallyRouted="false" />
-        <AssociationConnector Association="hmdbModel.FK__Wishlist__produc__70A8B9AE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="hmdbModel.BuyHistory" Width="1.5" PointX="3" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.Cart" Width="1.5" PointX="6" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.Checkout" Width="1.5" PointX="8.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.CustomerInfo" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.CustomerLogin" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.OrderDetail" Width="1.5" PointX="8.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.OrderHistory" Width="1.5" PointX="11.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.Order" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.OrderStatu" Width="1.5" PointX="9" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.PaymentMethod" Width="1.5" PointX="3" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.Product" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.Registered" Width="1.5" PointX="3" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.Report" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.Review" Width="1.5" PointX="6" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.Service" Width="1.5" PointX="3.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.ShippingAddress" Width="1.5" PointX="3" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmdbModel.Wishlist" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <AssociationConnector Association="hmdbModel.FK__AdminLogi__date___5E54FF49" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__BuyHistor__custo__7167D3BD" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__BuyHistor__produ__725BF7F6" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__BuyHistor__servi__73501C2F" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Cart__customer_i__68D28DBC" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Cart__product_id__69C6B1F5" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Cart__service_id__6ABAD62E" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Checkout__cart_i__6D9742D9" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Checkout__custom__6E8B6712" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__CustomerL__date___5B78929E" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Orders__customer__762C88DA" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__PaymentMe__custo__075714DC" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Registere__custo__589C25F3" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Reviews__custome__00AA174D" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__ShippingA__custo__047AA831" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Wishlist__custom__6501FCD8" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__OrderDeta__order__0A338187" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__OrderDeta__produ__0B27A5C0" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__OrderDeta__servi__0C1BC9F9" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__OrderHist__order__10E07F16" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__OrderHist__statu__11D4A34F" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Orders__product___7720AD13" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Orders__service___7814D14C" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Reviews__product__019E3B86" ManuallyRouted="false" />
+        <AssociationConnector Association="hmdbModel.FK__Wishlist__produc__65F62111" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

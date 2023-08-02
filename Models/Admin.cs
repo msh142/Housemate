@@ -11,7 +11,9 @@ namespace Housemate.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
     public partial class Admin
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,15 +21,39 @@ namespace Housemate.Models
         {
             this.AdminLogins = new HashSet<AdminLogin>();
         }
-    
+
+        [Key]
+        [ScaffoldColumn(false)]
         public int admin_id { get; set; }
+        [Required(ErrorMessage = "*Username cannot be empty.")]
+        [Display(Name = "Username")]
         public string username { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "*Email cannot be empty.")]
+        [Display(Name = "Email")]
         public string email { get; set; }
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "*Password cannot be empty.")]
+        [Display(Name = "Password")]
         public string password { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
+        [DataType(DataType.Password)]
+        [Compare("password", ErrorMessage = "*Password doesn't match.")]
+        [Display(Name = "Confirm Password")]
         public string con_pass { get; set; }
-    
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "*First Name cannot be empty.")]
+        [Display(Name = "First Name")]
+        public string first_name { get; set; }
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "*Last Name cannot be empty.")]
+        [Display(Name = "Last Name")]
+        public string last_name { get; set; }
+        [Display(Name = "Upload Image")]
+        public string image_data { get; set; }
+
+        public HttpPostedFileBase ImageFile { get; set; }
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdminLogin> AdminLogins { get; set; }
     }
