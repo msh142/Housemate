@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Housemate.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Housemate.Controllers
 {
     public class HomeController : Controller
     {
-
+        hmdbEntities db = new hmdbEntities();
         public ActionResult Index()
         {
             //SqlConnection conn = new SqlConnection(@"Database=hmdb;Server=G0DZI11A\SQLEXPRESS01;user=sa;password=123456");
@@ -21,7 +22,7 @@ namespace Housemate.Controllers
 
             //conn.Close();
 
-            return View();
+            return View(db.Products.ToList());
         }
 
         public ActionResult About()

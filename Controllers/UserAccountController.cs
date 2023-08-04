@@ -61,6 +61,15 @@ namespace Housemate.Controllers
             }
             return View(customer);
         }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            CustomerInfo customer = db.CustomerInfoes.Find(id);
+            db.CustomerInfoes.Remove(customer);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
 
         [HttpGet]
@@ -82,11 +91,13 @@ namespace Housemate.Controllers
                     customer.image_data = "~/img/customer/" + filename;
                     filename = Path.Combine(Server.MapPath("~/img/customer/"), filename);
                     ImageFile.SaveAs(filename);
-                    
+                    db.CustomerInfoes.Add(customer);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "UserAccount");
+
                 }
-                db.CustomerInfoes.Add(customer);
-                db.SaveChanges();
-                return RedirectToAction("Login", "UserAccount");
+                return View("RegisterUser", customer);
+                //return RedirectToAction("Login", "UserAccount");
                 // Redirect to a success page or perform any other action after successful registration
             }
             else
@@ -141,10 +152,6 @@ namespace Housemate.Controllers
         }
 
         public ActionResult Cart()
-        {
-            return View();
-        }
-        public ActionResult EditProfile()
         {
             return View();
         }

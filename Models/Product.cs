@@ -12,6 +12,7 @@ namespace Housemate.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public partial class Product
     {
@@ -45,7 +46,10 @@ namespace Housemate.Models
         [Required(ErrorMessage = "*Category cannot be empty.")]
         [Display(Name = "Category")]
         public string Category { get; set; }
-    
+
+
+        public HttpPostedFileBase ImageFile { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BuyHistory> BuyHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

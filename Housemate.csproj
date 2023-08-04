@@ -226,6 +226,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\Asset.jpg" />
+    <Content Include="img\box.png" />
     <Content Include="img\carousel\lkdwebsite_banner2_1800x.jpg" />
     <Content Include="img\carousel\lkdwebsite_banner_1800x.jpg" />
     <Content Include="img\carousel\Sale_banner_2_1200x.jpg" />
@@ -280,7 +281,6 @@
     <Content Include="Views\UserAccount\Login.cshtml" />
     <Content Include="Views\UserAccount\RegisterUser.cshtml" />
     <Content Include="Views\UserAccount\Cart.cshtml" />
-    <Content Include="Views\UserAccount\EditProfile.cshtml" />
     <Content Include="Views\Shared\RegisterLogin.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\Shared\AdminRegisterLogin.cshtml" />

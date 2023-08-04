@@ -42,121 +42,121 @@
 <body>
     <div class="container center-container" style="margin-top: 60px;">
         <h2>Register</h2>
-        <form asp-action="Register" method="post">
-            @using (Html.BeginForm("RegisterUser", "UserAccount", FormMethod.Post))
-            {
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    <div>
 
-                    </div>
-                    <div>
-                        @Html.LabelFor(model => model.username, "Username", new { @class = "form-label" })
-                        @Html.TextBoxFor(model => model.username, new { @class = "form-control reg" })
-                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.username, "", new { @class = "" })</h5>
-                    </div>
+        @using (Html.BeginForm("RegisterUser", "UserAccount", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div>
+
                 </div>
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.email, "Email", new { @class = "form-label" })
-                    </div>
-                    <div>
-                        @Html.TextBoxFor(model => model.email, new { @class = "form-control reg" })
-                        <h5 style="color:red; text-align:center;">@Html.ValidationMessageFor(model => model.email, "", new { @class = "" })</h5>
-                    </div>
+                <div>
+                    @Html.LabelFor(model => model.username, "Username", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.username, new { @class = "form-control reg" })
+                    <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.username, "", new { @class = "" })</h5>
                 </div>
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.first_name, "First Name", new { @class = "form-label" })
-                    </div>
-                    <div>
-                        @Html.TextBoxFor(model => model.first_name, new { @class = "form-control reg" })
-                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.first_name, "", new { @class = "" })</h5>
-                    </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.email, "Email", new { @class = "form-label" })
                 </div>
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.last_name, "Last Name", new { @class = "form-label" })
-                    </div>
-                    <div>
-                        @Html.TextBoxFor(model => model.last_name, new { @class = "form-control reg" })
-                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.last_name, "", new { @class = "" })</h5>
-                    </div>
+                <div>
+                    @Html.TextBoxFor(model => model.email, new { @class = "form-control reg" })
+                    <h5 style="color:red; text-align:center;">@Html.ValidationMessageFor(model => model.email, "", new { @class = "" })</h5>
                 </div>
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.password, "Password", new { @class = "form-label" })
-                    </div>
-                    <div>
-                        @Html.PasswordFor(model => model.password, new { @class = "form-control reg" })
-                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.password, "", new { @class = "" })</h5>
-                    </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.first_name, "First Name", new { @class = "form-label" })
                 </div>
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.con_pass, "Confirm Password", new { @class = "form-label" })
-                    </div>
-                    <div>
-                        @Html.PasswordFor(model => model.con_pass, new { @class = "form-control reg" })
-                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.con_pass, "", new { @class = "" })</h5>
-                    </div>
+                <div>
+                    @Html.TextBoxFor(model => model.first_name, new { @class = "form-control reg" })
+                    <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.first_name, "", new { @class = "" })</h5>
                 </div>
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.address, "Address", new { @class = "form-label" })
-                    </div>
-                    <div>
-                        @Html.TextAreaFor(model => model.address, new { @class = "form-control reg", @rows = 3 })
-                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.address, "", new { @class = "" })</h5>
-                    </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.last_name, "Last Name", new { @class = "form-label" })
                 </div>
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.city, "City", new { @class = "form-label" })
-                    </div>
-                    <div>
-                        @Html.TextBoxFor(model => model.city, new { @class = "form-control reg" })
-                    </div>
+                <div>
+                    @Html.TextBoxFor(model => model.last_name, new { @class = "form-control reg" })
+                    <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.last_name, "", new { @class = "" })</h5>
                 </div>
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.state, "State", new { @class = "form-label" })
-                    </div>
-                    <div>
-                        @Html.TextBoxFor(model => model.state, new { @class = "form-control reg" })
-                    </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.password, "Password", new { @class = "form-label" })
                 </div>
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.country, "Country", new { @class = "form-label" })
-                    </div>
-                    <div>
-                        @Html.TextBoxFor(model => model.country, new { @class = "form-control reg" })
-                    </div>
+                <div>
+                    @Html.PasswordFor(model => model.password, new { @class = "form-control reg" })
+                    <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.password, "", new { @class = "" })</h5>
                 </div>
-                <div class="form-group">
-                    <div>
-                        @Html.LabelFor(model => model.phone_number, "Phone Number", new { @class = "form-label" })
-                    </div>
-                    <div>
-                        @Html.TextBoxFor(model => model.phone_number, new { @class = "form-control reg" })
-                        <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "" })</h5>
-                    </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.con_pass, "Confirm Password", new { @class = "form-label" })
                 </div>
-                <div class="form-group" style="margin-top:20px;">
-                    @Html.LabelFor(model => model.image_data, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <input type="file" name="ImageFile" id="ImageFile" required />
-                        @Html.ValidationMessageFor(model => model.image_data, "", new { @class = "text-danger" })
-                    </div>
+                <div>
+                    @Html.PasswordFor(model => model.con_pass, new { @class = "form-control reg" })
+                    <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.con_pass, "", new { @class = "" })</h5>
                 </div>
-                <div class="submit-btn-container">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.address, "Address", new { @class = "form-label" })
                 </div>
-            }
-        </form>
+                <div>
+                    @Html.TextAreaFor(model => model.address, new { @class = "form-control reg", @rows = 3 })
+                    <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.address, "", new { @class = "" })</h5>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.city, "City", new { @class = "form-label" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(model => model.city, new { @class = "form-control reg" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.state, "State", new { @class = "form-label" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(model => model.state, new { @class = "form-control reg" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.country, "Country", new { @class = "form-label" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(model => model.country, new { @class = "form-control reg" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(model => model.phone_number, "Phone Number", new { @class = "form-label" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(model => model.phone_number, new { @class = "form-control reg" })
+                    <h5 style="color: red; text-align: center;">@Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "" })</h5>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top:20px;">
+                @Html.LabelFor(model => model.image_data, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="ImageFile" id="ImageFile" required />
+                    @Html.ValidationMessageFor(model => model.image_data, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="submit-btn-container">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        }
+
         <div class="text-center mt-3">
-            <a href="/Home/Login">Already registered? Log in here</a>
+            @Html.ActionLink("Already registered? Log in here", "Login", "UserAccount", new { area = "" }, new { @class = "btn" })
         </div>
     </div>
 

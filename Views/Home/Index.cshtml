@@ -1,62 +1,79 @@
-﻿
+﻿@model IEnumerable<Housemate.Models.Product>
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" type="text/css" href="~/CSS/navbar.css" />
 <style>
-    card {
-    }
-
     body {
         background-color: cadetblue;
-        background-repeat: no-repeat;
-        background-size: cover;
+    }
+
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .product-card {
+        width: calc(25% - 20px); /* Four cards in a row with 20px spacing */
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius:20px;
+        padding: 10px;
+        text-align: center;
+        background-color:papayawhip;
+    }
+
+    .product-image {
+        width: 100%;
+        min-height: 250px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        max-height: 30px;
+        min-height: 30px;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        max-width: 310px;
+        white-space: nowrap; /* Prevent line breaks */
+        overflow: hidden; /* Hide overflowed text */
+        text-overflow: ellipsis;
+    }
+
+    .product-description {
+        max-height: 20px;
+        min-height: 20px;
+        font-size: 14px;
+        color: #555;
+        max-width: 310px;
+        margin-bottom: 10px;
+        white-space: nowrap; /* Prevent line breaks */
+        overflow: hidden; /* Hide overflowed text */
+        text-overflow: ellipsis;
+    }
+
+    .product-price {
+        max-height: 10px;
+        min-height: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #e74c3c;
+        margin-bottom: 10px;
     }
 
 
-
-    .btn-add-to-cart {
-        background-color: #337ab7;
-        border-color: #2e6da4;
-    }
-
-        .btn-add-to-cart:hover,
-        .btn-add-to-cart:focus {
-            background-color: #286090;
-            border-color: #204d74;
-        }
-
-    /* Style for the "Add to Wishlist" button */
-    .btn-add-to-wishlist {
-        background-color: #f0ad4e;
-        border-color: #eea236;
-    }
-
-        .btn-add-to-wishlist:hover,
-        .btn-add-to-wishlist:focus {
-            background-color: #ec971f;
-            border-color: #d58512;
-        }
-
-    /* Style for the "Buy Now" button */
-    .btn-buy-now {
-        background-color: #5cb85c;
-        border-color: #4cae4c;
-    }
-
-        .btn-buy-now:hover,
-        .btn-buy-now:focus {
-            background-color: #449d44;
-            border-color: #398439;
-        }
 </style>
 
 
 <body>
     <div class="container-fluid body-content ">
         <div id="imageCarousel" class="carousel slide" data-interval="1800"
-             data-ride="carousel" data-pause="hover" data-wrap="true" style="width: 1210px; height:fit-content; margin-left: -30px;  margin-right: -30px;">
+             data-ride="carousel" data-pause="hover" data-wrap="true" style="width: 1300px; margin-left: -30px;  margin-right: -30px;">
 
             <ol class="carousel-indicators">
                 <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
@@ -90,13 +107,54 @@
             <a href="#imageCarousel" class="carousel-control left" data-slide="prev"></a>
             <a href="#imageCarousel" class="carousel-control right" data-slide="next"></a>
         </div>
-        <div class="container-fluid">
-
+    </div>
+    <hr />
+    
+    <div class="container-fluid">
+        <div class="product-list">
+            @foreach (var item in Model)
+            {
+            <div class="product-card">
+                <img class="product-image" src=@Url.Content(item.image_data) alt="ProductName" onerror=" this.src='~/img/box.png'">
+                <div class="product-rating">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        if (i < 3)
+                        {
+                            <span class="rating-star">&#9733;</span>
+                        }
+                        else
+                        {
+                            <span class="rating-star">&#9734;</span>
+                        }
+                    }
+                </div>
+                <h3 class="product-name">@Html.DisplayFor(modelItem => item.product_name)</h3>
+                <p class="product-description">@Html.DisplayFor(modelItem => item.description)</p>
+                <p class="product-price">@Html.DisplayFor(modelItem => item.price)</p>
+                <button class="btn btn-warning" style="display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;">Add to Wishlist</button>
+                <button class="btn btn-success" style="display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;">Add to Cart</button>
+                <button class="btn btn-primary" style="display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;">Buy Now</button>
+            </div>
+            }
         </div>
-
     </div>
 
-
-
-
 </body>
+@*<div class="product-card">
+    <img class="product-image" src=@Url.Content(item.image_data) alt="Product Image">
+    <h3 class="product-name">@Html.DisplayFor(modelItem => item.product_name)</h3>
+    <p class="product-category">@Html.DisplayFor(modelItem => item.price)</p>
+    <p class="product-description">@Html.DisplayFor(modelItem => item.description)</p>
+    <p class="product-category">Category :@Html.DisplayFor(modelItem => item.Category)</p>
+    <div class="product-rating">
+        <span class="rating-star">&#9733;</span>
+        <span class="rating-star">&#9733;</span>
+        <span class="rating-star">&#9733;</span>
+        <span class="rating-star">&#9733;</span>
+        <span class="rating-star">&#9734;</span>
+    </div>
+    <button class="btn-wishlist">Add to Wishlist</button>
+    <button class="btn-cart">Add to Cart</button>
+    <button class="btn-buy-now">Buy Now</button>
+</div>*@

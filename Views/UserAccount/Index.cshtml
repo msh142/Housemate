@@ -52,13 +52,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.username)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.first_name)
@@ -67,22 +61,13 @@
             @Html.DisplayFor(modelItem => item.last_name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.address)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.state)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.country)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.phone_number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.con_pass)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.image_data)

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    ViewBag.customerID = int.Parse(Request.Cookies["CustomerID"].Value);
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -131,7 +135,7 @@
                         @Html.ActionLink(" ", "Cart", "UserAccount", new { area = "" }, new { @class = "btn btn-success glyphicon glyphicon-shopping-cart navbtn", @style = "color:white;" })
                     </li>
                     <li style="padding-top: 5px; padding-right: 5px;" class="text-white">
-                        @Html.ActionLink(" ", "EditProfile", "UserAccount", new { area = "" }, new { @class = "btn btn-warning glyphicon glyphicon-user navbtn", @style = "color:white;" })
+                        @Html.ActionLink(" ", "Edit", "UserAccount", new { id = ViewBag.customerID}, new { @class = "btn btn-warning glyphicon glyphicon-user navbtn", @style = "color:white;" })
                     </li>
                     @if (Request.Cookies["CustomerEmail"] != null)
                     {
