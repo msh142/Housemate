@@ -13,10 +13,10 @@ namespace Housemate.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class hmdbEntities : DbContext
+    public partial class hmdbEntities1 : DbContext
     {
-        public hmdbEntities()
-            : base("name=hmdbEntities")
+        public hmdbEntities1()
+            : base("name=hmdbEntities1")
         {
         }
     

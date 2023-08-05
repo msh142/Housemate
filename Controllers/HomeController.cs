@@ -10,7 +10,7 @@ namespace Housemate.Controllers
 {
     public class HomeController : Controller
     {
-        hmdbEntities db = new hmdbEntities();
+        hmdbEntities1 db = new hmdbEntities1();
         public ActionResult Index()
         {
             //SqlConnection conn = new SqlConnection(@"Database=hmdb;Server=G0DZI11A\SQLEXPRESS01;user=sa;password=123456");
@@ -25,6 +25,11 @@ namespace Housemate.Controllers
             return View(db.Products.ToList());
         }
 
+        public ActionResult ProductShow(String category)
+        {
+            IEnumerable<Product> prod = new List<Product>().Where(a => a.Category.Equals(category));
+            return View(prod.ToList());
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -38,6 +43,12 @@ namespace Housemate.Controllers
 
             return View();
         }
-        
+        public ActionResult Help()
+        {
+            ViewBag.Message = "Your help page.";
+
+            return View();
+        }
+
     }
 }

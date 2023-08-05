@@ -13,7 +13,7 @@ namespace Housemate.Controllers
 {
     public class AdminsController : Controller
     {
-        private hmdbEntities db = new hmdbEntities();
+        private hmdbEntities1 db = new hmdbEntities1();
 
         // GET: Admins
         public ActionResult Index()

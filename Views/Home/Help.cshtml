@@ -1,0 +1,194 @@
+﻿@{ ViewBag.Title = "Help Center"; }
+<link rel="stylesheet" type="text/css" href="~/CSS/navbar.css" />
+<h2>@ViewBag.Title.</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            color: #2c3e50;
+            background-color: cadetblue;
+            margin-top: 30px;
+        }
+
+        h1 {
+            margin: 0;
+            line-height: 2;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0 0 0.5em;
+            font-weight: normal;
+        }
+
+        input {
+            position: absolute;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .row {
+            display: flex;
+        }
+
+            .row .col {
+                flex: 1;
+            }
+
+                .row .col:last-child {
+                    margin-left: 1em;
+                }
+
+        /* Accordion styles */
+        .tabs {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
+        }
+
+        .tab {
+            width: 100%;
+            color: white;
+            overflow: hidden;
+        }
+
+        .tab-label {
+            display: flex;
+            justify-content: space-between;
+            padding: 1em;
+            background: #2c3e50;
+            font-weight: bold;
+            cursor: pointer;
+            /* Icon */
+        }
+
+            .tab-label:hover {
+                background: #1a252f;
+            }
+
+            .tab-label::after {
+                content: "❯";
+                width: 1em;
+                height: 1em;
+                text-align: center;
+                transition: all 0.35s;
+            }
+
+        .tab-content {
+            max-height: 0;
+            padding: 0 1em;
+            color: #2c3e50;
+            background: white;
+            transition: all 0.35s;
+        }
+
+        .tab-close {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1em;
+            font-size: 0.75em;
+            background: #2c3e50;
+            cursor: pointer;
+        }
+
+            .tab-close:hover {
+                background: #1a252f;
+            }
+
+        input:checked + .tab-label {
+            background: #1a252f;
+        }
+
+            input:checked + .tab-label::after {
+                transform: rotate(90deg);
+            }
+
+        input:checked ~ .tab-content {
+            max-height: 100vh;
+            padding: 1em;
+        }
+    </style>
+
+
+
+</head>
+<body>
+
+    <div class="row">
+
+        <div class="col" style="margin-top:20px">
+            <h2 style="margin-left:20px"><b>FAQ</b> </h2>
+            <div class="tabs" style="margin-top:20px; margin-bottom:30px; margin-left:20px">
+                <div class="tab">
+                    <input type="radio" id="rd1" name="rd">
+                    <label class="tab-label" for="rd1"> What payment methods do you accept?</label>
+                    <div class="tab-content">
+                        We accept various payment methods, including credit/debit cards (Visa, MasterCard), Bkash, Rocket, and Nagad.
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd2" name="rd">
+                    <label class="tab-label" for="rd2"> Do you offer free shipping?</label>
+                    <div class="tab-content">
+                        Yes, we offer free shipping on orders above a certain amount. Please check our shipping policy for more details.
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd3" name="rd">
+                    <label class="tab-label" for="rd3">How can I track my order?</label>
+                    <div class="tab-content">
+                        Once your order is shipped, we will provide you with a tracking number via email or SMS. You can use this tracking number to track the status of your delivery.
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd4" name="rd">
+                    <label class="tab-label" for="rd4">
+                        What is your return policy?
+                    </label>
+                    <div class="tab-content">
+                        We have a hassle-free return policy. If you are not satisfied with your purchase, you can return the product within 30 days of delivery for a full refund or exchange. Please read our return policy for more information.
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd5" name="rd">
+                    <label class="tab-label" for="rd5"> How long does it take for delivery?</label>
+                    <div class="tab-content">
+                        The delivery time varies depending on your location and the product's availability. Generally, orders are delivered within 3-7 business days. You can find more details about estimated delivery times on the product page or during the checkout process.
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd6" name="rd">
+                    <label class="tab-label" for="rd6"> Are your products covered by a warranty?</label>
+                    <div class="tab-content">
+                        Yes, most of our products come with a manufacturer's warranty. The warranty period and coverage details are specified on the product page. If you encounter any issues, please contact our customer support for assistance.
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd7" name="rd">
+                    <label class="tab-label" for="rd7">Can I cancel my order after it has been placed?</label>
+                    <div class="tab-content">
+                        You can cancel your order within a certain time frame after placing it. Please contact our customer support as soon as possible to check if cancellation is still possible.
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd8" name="rd">
+                    <label class="tab-label" for="rd8">How do I contact customer support?</label>
+                    <div class="tab-content">
+                        You can reach our customer support team through various channels, including phone, email, or live chat. Visit our "Contact Us" page for the relevant contact details.
+
+
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd9" name="rd">
+                    <label for="rd9" class="tab-close">Close all &times;</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

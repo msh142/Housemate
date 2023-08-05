@@ -11,28 +11,15 @@ namespace Housemate.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Report
     {
-        [Key]
-        [ScaffoldColumn(false)]
         public int report_id { get; set; }
-        [Required(ErrorMessage = "*E-mail cannot be empty.")]
-        [Display(Name = "Customer Email")]
         public string customer_email { get; set; }
-        [Required(ErrorMessage = "*Subject cannot be empty.")]
-        [Display(Name = "Subject")]
         public string report_subject { get; set; }
-        [Display(Name = "Descritption")]
         public string report_details { get; set; }
         public Nullable<System.DateTime> report_date { get; set; }
-        [Required(ErrorMessage = "*Name cannot be empty.")]
-        [Display(Name = "Customer Name")]
         public string customer_name { get; set; }
-        [DataType(DataType.PhoneNumber)]
-        [Required(ErrorMessage = "*Contact Number cannot be empty.")]
-        [Display(Name = "Contact Number")]
         public string customer_contact { get; set; }
     }
 }

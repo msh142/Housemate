@@ -1,5 +1,35 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
+﻿@{ ViewBag.Title = "Contact Us"; }
 <link rel="stylesheet" type="text/css" href="~/CSS/navbar.css" />
 <h2>@ViewBag.Title.</h2>
+<style>
+    body {
+        background-color: cadetblue;
+    }
+
+    .map-container {
+        margin-top: 30px;
+        margin-left: 50px;
+    }
+</style>
+<body>
+    <!--Google map-->
+    <div id="map-container-google-2" class="z-depth-1-half map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7497568.099646885!2d85.04630207306761!3d23.42718740000479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c77decb5f845%3A0xc2eadd2f3b867792!2sAhsanullah%20University%20of%20Science%20and%20Technology!5e0!3m2!1sen!2sus!4v1690738084212!5m2!1sen!2sus" frameborder="0"
+                style="border:0" allowfullscreen></iframe>
+    </div>
+
+    <!--Google Maps-->
+    <div style="margin-left:40px">
+        <h3>Address:</h3>
+        <p>141 & 142, Love Road, Tejgaon Industrial Area, Dhaka-1208.</p>
+    </div>
+    <div style="margin-left:40px">
+        <h3>Email Address:</h3>
+        <p><a href="mailto:example@aust.edu" class="text-success">example@aust.edu</a></p>
+    </div>
+    <div style="margin-left:40px">
+        <h3>Mobile Number:</h3>
+        <p>+88016xxxxxxxx</p>
+    </div>
+
+</body>

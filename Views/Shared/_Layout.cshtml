@@ -1,5 +1,9 @@
 ﻿@{ 
-    ViewBag.customerID = int.Parse(Request.Cookies["CustomerID"].Value);
+    if (Request.Cookies["CustomerID"] != null)
+    {
+        ViewBag.customerID = int.Parse(Request.Cookies["CustomerID"].Value);
+    }
+    ViewBag.Category = null;
 }
 
 <!DOCTYPE html>
@@ -71,6 +75,7 @@
             border-style: solid;
             text-align: left;
         }
+        
     </style>
 </head>
 <body>
@@ -83,13 +88,16 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Homemate", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+               
             </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
+
+            <div class="collapse navbar-collapse" id="navbar-collapse" >
                 <ul class="nav navbar-nav navbar-left">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @style = "color:white;" })</li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white">Products <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Furniture", "Category1", "Home", new { area = "" }, new { })</li>
+                            <li>@Html.ActionLink("Furniture", "ProductShow", "Home",new { area = ""}, new {category = "Furniture"})</li>
                             <li>@Html.ActionLink("Home Decoration", "Category2", "Home", new { area = "" }, new { })</li>
                             <li>@Html.ActionLink("Kitchen & Dining", "Category3", "Home", new { area = "" }, new { })</li>
                             <li>@Html.ActionLink("Bed & Bath", "Category4", "Home", new { area = "" }, new { })</li>
@@ -111,8 +119,10 @@
                             <li>@Html.ActionLink("Moving & Packaging", "Service2", "Home", new { area = "" }, new { })</li>
                         </ul>
                     </li>
+
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @style = "color:white;" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @style = "color:white;" })</li>
+                    <li>@Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @style = "color:white;" })</li>
+                    <li>@Html.ActionLink("Help", "Help", "Home", new { area = "" }, new { @style = "color:white;" })</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Request.Cookies["CustomerUsername"] != null)

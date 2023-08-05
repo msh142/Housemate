@@ -13,7 +13,7 @@ namespace Housemate.Controllers
 {
     public class ProductsController : Controller
     {
-        private hmdbEntities db = new hmdbEntities();
+        private hmdbEntities1 db = new hmdbEntities1();
 
         // GET: Products
         public ActionResult Index()
@@ -39,6 +39,7 @@ namespace Housemate.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
@@ -49,6 +50,8 @@ namespace Housemate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Product product, HttpPostedFileBase ImageFile)
         {
+            var selectedValue = product.Category;
+            ViewBag.TeaType = selectedValue.ToString();
             if (ModelState.IsValid)
             {
                 if (ImageFile != null && ImageFile.ContentLength > 0)
@@ -61,7 +64,7 @@ namespace Housemate.Controllers
                     filename = Path.Combine(Server.MapPath("~/img/products/"), filename);
                     ImageFile.SaveAs(filename);
                 }
-
+                product.Category = product.Category.ToString();
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
