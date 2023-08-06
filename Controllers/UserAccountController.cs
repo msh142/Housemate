@@ -93,7 +93,7 @@ namespace Housemate.Controllers
                     ImageFile.SaveAs(filename);
                     db.CustomerInfoes.Add(customer);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "UserAccount");
+                    return RedirectToAction("Login", "UserAccount");
 
                 }
                 return View("RegisterUser", customer);
@@ -103,7 +103,7 @@ namespace Housemate.Controllers
             else
             {
                 // Model is not valid, return to the registration form with validation errors
-                return View("RegisterUser", customer);
+                return View("RegisterUser");
             }
         }
 

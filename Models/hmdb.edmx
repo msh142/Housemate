@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hmdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="hmdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -48,6 +48,7 @@
           <Property Name="product_id" Type="int" />
           <Property Name="service_id" Type="int" />
           <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Checkout">
           <Key>
@@ -633,8 +634,7 @@
             <End Role="Wishlist" EntitySet="Wishlist" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hmdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -690,6 +690,7 @@
           <NavigationProperty Name="Product" Relationship="Self.FK__Cart__product_id__69C6B1F5" FromRole="Cart" ToRole="Products" />
           <NavigationProperty Name="Service" Relationship="Self.FK__Cart__service_id__6ABAD62E" FromRole="Cart" ToRole="Services" />
           <NavigationProperty Name="Checkouts" Relationship="Self.FK__Checkout__cart_i__6D9742D9" FromRole="Cart" ToRole="Checkout" />
+          <Property Name="price" Type="Decimal" />
         </EntityType>
         <EntityType Name="Checkout">
           <Key>
@@ -1362,6 +1363,7 @@
           <EntitySetMapping Name="Carts">
             <EntityTypeMapping TypeName="hmdbModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="cart_id" ColumnName="cart_id" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />

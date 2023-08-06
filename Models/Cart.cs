@@ -25,6 +25,7 @@ namespace Housemate.Models
         public Nullable<int> product_id { get; set; }
         public Nullable<int> service_id { get; set; }
         public Nullable<int> quantity { get; set; }
+        public Nullable<decimal> price { get; set; }
     
         public virtual CustomerInfo CustomerInfo { get; set; }
         public virtual Product Product { get; set; }

@@ -30,11 +30,10 @@
         @using (Html.BeginForm())
         {
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-2" style="margin-top:100px;">
                     <img src= "@Url.Content(Model.image_data)" alt="Profile Picture" class="profile-image">
-                    <button type="button" class="btn btn-primary btn-block mt-3" data-toggle="modal" data-target="#editModal">Edit</button>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-10">
 
                     @Html.AntiForgeryToken()
 
@@ -133,9 +132,6 @@
                                 <input type="submit" value="Save" class="btn btn-default" />
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        @Html.ActionLink("Back to List", "Index")
                     </div>
                 </div>
             </div>

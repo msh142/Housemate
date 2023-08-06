@@ -129,32 +129,17 @@
                         }
                     }
                 </div>
-                <h3 class="product-name">@Html.DisplayFor(modelItem => item.product_name)</h3>
+                <h3 class="product-name">
+                    <a href="@Url.Action("Details", "Home", new { id = item.product_id })">@Html.DisplayFor(modelItem => item.product_name)</a>
+                </h3>
                 <p class="product-description">@Html.DisplayFor(modelItem => item.description)</p>
-                <p class="product-price">@Html.DisplayFor(modelItem => item.price)</p>
-                <button class="btn btn-warning" style="display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;">Add to Wishlist</button>
-                <button class="btn btn-success" style="display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;">Add to Cart</button>
-                <button class="btn btn-primary" style="display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;">Buy Now</button>
+                <p class="product-price">৳@Html.DisplayFor(modelItem => item.price)</p>
+                @Html.ActionLink("Add to Wishlist", "Index", "Home", new { id = item.product_id }, new { @class = "btn btn-warning navbtn", @style = "display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;" })
+                @Html.ActionLink("Add to Cart", "AddToCart", "Home", new { id = item.product_id }, new { @class = "btn btn-success navbtn", @style = "display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;" })
+                @Html.ActionLink("Buy Now", "Index", "Home", new { id = item.product_id }, new { @class = "btn btn-primary navbtn", @style = "display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;" })
             </div>
             }
         </div>
     </div>
 
 </body>
-@*<div class="product-card">
-    <img class="product-image" src=@Url.Content(item.image_data) alt="Product Image">
-    <h3 class="product-name">@Html.DisplayFor(modelItem => item.product_name)</h3>
-    <p class="product-category">@Html.DisplayFor(modelItem => item.price)</p>
-    <p class="product-description">@Html.DisplayFor(modelItem => item.description)</p>
-    <p class="product-category">Category :@Html.DisplayFor(modelItem => item.Category)</p>
-    <div class="product-rating">
-        <span class="rating-star">&#9733;</span>
-        <span class="rating-star">&#9733;</span>
-        <span class="rating-star">&#9733;</span>
-        <span class="rating-star">&#9733;</span>
-        <span class="rating-star">&#9734;</span>
-    </div>
-    <button class="btn-wishlist">Add to Wishlist</button>
-    <button class="btn-cart">Add to Cart</button>
-    <button class="btn-buy-now">Buy Now</button>
-</div>*@

@@ -11,9 +11,7 @@ namespace Housemate.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web;
-
+    
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,30 +24,15 @@ namespace Housemate.Models
             this.Reviews = new HashSet<Review>();
             this.Wishlists = new HashSet<Wishlist>();
         }
-
-        [Required(ErrorMessage = "*ProductID cannot be empty.")]
-        [Display(Name = "ProductID")]
+    
         public int product_id { get; set; }
-        [Required(ErrorMessage = "*Product Name cannot be empty.")]
-        [Display(Name = "Product Name")]
         public string product_name { get; set; }
-        [Display(Name = "Product Description")]
         public string description { get; set; }
-        [Required(ErrorMessage = "*Price cannot be empty.")]
-        [Display(Name = "Price")]
         public Nullable<decimal> price { get; set; }
-        [Required(ErrorMessage = "*Quantity cannot be empty.")]
-        [Display(Name = "Quantity")]
         public Nullable<int> availability { get; set; }
-        [Display(Name = "Upload Image")]
         public string image_data { get; set; }
-        [Required(ErrorMessage = "*Category cannot be empty.")]
-        [Display(Name = "Category")]
         public string Category { get; set; }
-
-
-        public HttpPostedFileBase ImageFile { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BuyHistory> BuyHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

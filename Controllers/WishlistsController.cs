@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,120 +10,116 @@ using Housemate.Models;
 
 namespace Housemate.Controllers
 {
-    public class ProductsController : Controller
+    public class WishlistsController : Controller
     {
         private hmdbEntities db = new hmdbEntities();
 
-        // GET: Products
+        // GET: Wishlists
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            var wishlists = db.Wishlists.Include(w => w.CustomerInfo).Include(w => w.Product);
+            return View(wishlists.ToList());
         }
 
-        // GET: Products/Details/5
+        // GET: Wishlists/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Wishlist wishlist = db.Wishlists.Find(id);
+            if (wishlist == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(wishlist);
         }
 
-        // GET: Products/Create
+        // GET: Wishlists/Create
         public ActionResult Create()
         {
+            ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username");
+            ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Wishlists/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product, HttpPostedFileBase ImageFile)
+        public ActionResult Create([Bind(Include = "wishlist_id,customer_id,product_id")] Wishlist wishlist)
         {
-            Product prod = new Product();
-            prod = product;
             if (ModelState.IsValid)
             {
-                if (ImageFile != null && ImageFile.ContentLength > 0)
-                {
-                    // Process the uploaded file
-                    string filename = Path.GetFileNameWithoutExtension(ImageFile.FileName);
-                    string extension = Path.GetExtension(ImageFile.FileName);
-                    filename = filename + DateTime.Now.ToString("yymmssff") + extension;
-                    prod.image_data = "~/img/products/" + filename;
-                    filename = Path.Combine(Server.MapPath("~/img/products/"), filename);
-                    ImageFile.SaveAs(filename);
-                }
-
-                db.Products.Add(prod);
+                db.Wishlists.Add(wishlist);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username", wishlist.customer_id);
+            ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name", wishlist.product_id);
+            return View(wishlist);
         }
 
-        // GET: Products/Edit/5
+        // GET: Wishlists/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Wishlist wishlist = db.Wishlists.Find(id);
+            if (wishlist == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username", wishlist.customer_id);
+            ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name", wishlist.product_id);
+            return View(wishlist);
         }
 
-        // POST: Products/Edit/5
+        // POST: Wishlists/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "product_id,product_name,description,price,availability,image_data,Category")] Product product)
+        public ActionResult Edit([Bind(Include = "wishlist_id,customer_id,product_id")] Wishlist wishlist)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(wishlist).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(product);
+            ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username", wishlist.customer_id);
+            ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name", wishlist.product_id);
+            return View(wishlist);
         }
 
-        // GET: Products/Delete/5
+        // GET: Wishlists/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Wishlist wishlist = db.Wishlists.Find(id);
+            if (wishlist == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(wishlist);
         }
 
-        // POST: Products/Delete/5
+        // POST: Wishlists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Wishlist wishlist = db.Wishlists.Find(id);
+            db.Wishlists.Remove(wishlist);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

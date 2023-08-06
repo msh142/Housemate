@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Housemate.Models.Cart>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style>
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .cart-row {
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px 0;
+            background-color: darkgray;
+            align-content: center;
+            max-height: 200px;
+            min-width: 200px;
+        }
+
+        .product-image {
+            width: 100px;
+            height: auto;
+        }
+
+        .product-name {
+            max-height: 30px;
+            min-height: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            max-width: 310px;
+            text-shadow: initial;
+            white-space: nowrap; /* Prevent line breaks */
+            overflow: hidden; /* Hide overflowed text */
+            text-overflow: ellipsis;
+        }
+
+        .unit-price {
+            color: white;
+        }
+
+        .product-quantity {
+            width: 70px;
+        }
+
+        .total-price {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            padding: 10px 0;
+        }
+
+        body {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: darkslategray;
+        }
+    </style>
+
+    <script>
+        function updateTotalPrice(row) {
+            const quantityInput = row.querySelector(".quantity-input");
+            const unitPriceCell = row.querySelector(".unit-price");
+            const totalPriceCell = row.querySelector(".total-price");
+
+            const quantity = parseInt(quantityInput.value);
+            const unitPrice = parseFloat(unitPriceCell.textContent.slice(1)); // Assuming price format: $XX.XX
+            const totalPrice = quantity * unitPrice;
+
+            totalPriceCell.textContent = "৳" + totalPrice.toFixed(2);
+        }
+        function UpdateQuantity(cartId, quantity) {
+        $.ajax({
+            url: "@Url.Action("UpdateQuantity", "Carts")",
+            type: "POST",
+            data: { cartId: cartId, quantity: quantity },
+            success: function () {
+                // Handle success, e.g., show a success message
+            },
+            error: function () {
+                // Handle error, e.g., show an error message
+            }
+        });
+    }
+    </script>
+</head>
+
+<h2 style="color:white; "><b>My Cart</b></h2>
+
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <div class="container-fluid center-block">
+                    <div class="row cart-row">
+                        <div class="col-md-2">
+                            <img src="@Url.Content(item.Product.image_data)" alt="" class="product-image">
+                        </div>
+                        <div class="col-md-3">
+                            <h3 class="product-name">
+                                <a href="@Url.Action("Details", "Home", new { id = item.product_id })">@Html.DisplayFor(modelItem => item.Product.product_name)</a>
+                            </h3>
+                            <p class="unit-price">৳@Html.DisplayFor(modelItem => item.Product.price)</p>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="quantity-input" name="quantityInput" type="number" min="1" value="@Url.Content(item.quantity.Value.ToString())" onchange="updateTotalPrice(this.parentElement.parentElement);" max=@Url.Content(item.Product.availability.Value.ToString())>
+                            <button onclick="UpdateQuantity('@item.cart_id', this.parentElement.querySelector('.quantity-input').value)">Update</button>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="total-price">৳@item.price</p>
+                        </div>
+                        <div class="col-md-2">
+                            @Html.ActionLink("Remove", "Delete", new { id = item.cart_id }, new { @class = "btn btn-danger" })
+                        </div>
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
