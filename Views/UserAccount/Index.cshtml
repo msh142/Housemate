@@ -6,9 +6,19 @@
 }
 
 <h2>All Users</h2>
+@using (Html.BeginForm("Search", "UserAccount", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-3">
+            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Search by ID, username or email", @style ="width:300px"})
+        </div>
+        <div class="col-md-9">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+}
 
-
-<table class="table">
+<table class="table" style="margin-top:30px;">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.username)
@@ -49,35 +59,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.first_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.last_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone_number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.image_data)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.customer_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.customer_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.customer_id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.first_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.image_data)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.customer_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.customer_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.customer_id })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -1,0 +1,67 @@
+﻿@model Housemate.Models.PaymentMethod
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PaymentMethod</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.card_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.card_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cardholder_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cardholder_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.expiration_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expiration_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cvv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cvv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.is_default)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.is_default)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerInfo.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerInfo.username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.payment_method_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

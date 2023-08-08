@@ -1,0 +1,173 @@
+﻿@model IEnumerable<Housemate.Models.Checkout>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        background-color: #d6d6d6;
+    }
+
+    .reciever {
+        width: 100%;
+        text-align: left;
+        background-color: darkorchid;
+        padding: 15px;
+        padding-left: 30px;
+        color: white;
+        border: 0px;
+        border-radius: 30px;
+        margin-top: 20px;
+    }
+
+    .reciever-address {
+        border: 2px solid;
+        border-color: darkgrey;
+        background-color: white;
+        height: 150px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 30px;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .reciever-address {
+        margin-top: 10px;
+    }
+
+    .product-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-top: 20px;
+    }
+
+    .cart-row {
+        border-bottom: 1px solid #dee2e6;
+        padding: 10px 0;
+        background-color: darkgray;
+        align-content: center;
+        width: 100%;
+        border-radius: 30px;
+        margin-left: 0px;
+    }
+
+    .product-name {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        max-width: 400px;
+        text-shadow: initial;
+        white-space: nowrap; /* Prevent line breaks */
+        overflow: hidden; /* Hide overflowed text */
+        text-overflow: ellipsis;
+    }
+
+    .unit-price {
+        color: white;
+    }
+
+    .product-quantity {
+        width: 70px;
+    }
+
+    .total-price {
+        font-size: 20px;
+        color: white;
+        font-weight: bold;
+        padding: 10px 0;
+    }
+
+    .selected-products {
+        border-radius: 30px;
+        margin-top: 20px;
+    }
+
+    .summary {
+        background-color: white;
+        align-content: center;
+        padding: 15px;
+        border-radius: 30px;
+        margin-top: 20px;
+    }
+
+    .line {
+        background-color: dimgray;
+        height: 2px;
+    }
+</style>
+<body>
+    <div class="reciever">
+        <h2><b>Deliver to: @ViewBag.customer.first_name @ViewBag.customer.last_name</b></h2>
+        <p>@Request.Cookies["CustomerEmail"].Value</p>
+    </div>
+    <div class="reciever-address">
+
+        @if (ViewBag.address == null)
+        {
+            <p>@ViewBag.noaddress</p>
+        }
+        else
+        {
+            <p>@ViewBag.address.address_line1 @ViewBag.address.address_line2</p>
+            <p>@ViewBag.address.city, @ViewBag.address, @ViewBag.address.city-@ViewBag.address.postal_code, @ViewBag.address.country</p>
+        }
+        <div style="margin-top:5px;">
+            @Html.ActionLink("Change Address", "Create", "ShippingAddresses", new { id = @ViewBag.customer.customer_id }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <div class="selected-products">
+        @foreach (var item in ViewBag.cartR)
+        {
+            <div class="row cart-row">
+                <div class="col-md-1" style="align-content:center;">
+                    <img src="@Url.Content(item.Product.image_data)" alt="" class="product-image">
+                </div>
+                <div class="col-md-7">
+                    <h3 class="product-name">
+                        <a href="@Url.Action("Details", "Home", new { id = item.product_id })">@item.Product.product_name</a>
+                    </h3>
+                    <p class="unit-price" style="font-size:large"> ৳@item.Product.price</p>
+                    <p>Quantity: @item.quantity</p>
+                </div>
+                <div class="col-md-4" style="text-align: center; padding-top: 20px;">
+                    <p class="total-price" style="font-size:x-large">৳@item.price</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="summary">
+        <h2><b>Order Summary</b></h2>
+        <div>
+            Items total: ৳@ViewBag.cart.price
+        </div>
+
+        <div>
+            Delivery fee: ৳@ViewBag.fee
+        </div>
+        <div>
+            Discount: ৳@ViewBag.discount
+        </div>
+        <div class="line">
+
+        </div>
+        <div class="row final " style="margin-top: 10px;">
+            <div class="col-md-6">
+                @{
+                    decimal total = 0;
+                    total = ViewBag.cart.price + ViewBag.fee;
+                }
+                <p style="font-size:20px; color:red;">Total: ৳@total </p>
+                <p style="color:gray">VAT included, where applicable</p>
+            </div>
+            <div class="col-md-2" style="position:absolute; right:0px;">
+
+                @Html.ActionLink("Place Order", "Create", "PaymentMethods",new { area = ""}, new { @class = "btn btn-primary navbtn" , @style = "height:50px; width:120px;font-size:large;padding:10px;" })
+            </div>
+        </div>
+    </div>
+
+</body>

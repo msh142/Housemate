@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Housemate.Models.Product>
+@{
+    ViewBag.Title = "CategoryView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .product-card {
+        width: calc(25% - 20px); /* Four cards in a row with 20px spacing */
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        padding: 10px;
+        text-align: center;
+        background-color: papayawhip;
+    }
+
+    .product-image {
+        height:250px;
+        width:250px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        max-height: 30px;
+        min-height: 30px;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        max-width: 310px;
+        white-space: nowrap; /* Prevent line breaks */
+        overflow: hidden; /* Hide overflowed text */
+        text-overflow: ellipsis;
+    }
+
+    .product-description {
+        max-height: 20px;
+        min-height: 20px;
+        font-size: 14px;
+        color: #555;
+        max-width: 310px;
+        margin-bottom: 10px;
+        white-space: nowrap; /* Prevent line breaks */
+        overflow: hidden; /* Hide overflowed text */
+        text-overflow: ellipsis;
+    }
+
+    .product-price {
+        max-height: 10px;
+        min-height: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #e74c3c;
+        margin-bottom: 10px;
+    }
+    .body-content {
+        margin-right: auto; /* Push content to the left */
+        margin-left: 0;
+    }
+</style>
+<h2 style="text-align:center;">@ViewBag.category</h2>
+<div class="container-fluid body-content ">
+    <div class="product-list">
+        @foreach (var item in Model)
+        {
+            <div class="product-card">
+                <img class="product-image" src=@Url.Content(item.image_data) alt="ProductName" onerror=" this.src='~/img/box.png'">
+                <div class="product-rating">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        if (i < 3)
+                        {
+                            <span class="rating-star">&#9733;</span>
+                        }
+                        else
+                        {
+                            <span class="rating-star">&#9734;</span>
+                        }
+                    }
+                </div>
+                <h3 class="product-name">
+                    <a href="@Url.Action("Details", "Home", new { id = item.product_id })">@Html.DisplayFor(modelItem => item.product_name)</a>
+                </h3>
+                <p class="product-description">@Html.DisplayFor(modelItem => item.description)</p>
+                <p class="product-price">৳@Html.DisplayFor(modelItem => item.price)</p>
+                <p class="product-quantity" style="color:grey">Qty.:@Html.DisplayFor(modelItem => item.availability)</p>
+                @Html.ActionLink("Add to Wishlist", "Index", "Home", new { id = item.product_id }, new { @class = "btn btn-warning navbtn", @style = "display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;" })
+                @Html.ActionLink("Add to Cart", "AddToCart", "Home", new { id = item.product_id }, new { @class = "btn btn-success navbtn", @style = "display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;" })
+                @Html.ActionLink("Buy Now", "Index", "Home", new { id = item.product_id }, new { @class = "btn btn-primary navbtn", @style = "display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;" })
+            </div>
+        }
+    </div>
+</div>

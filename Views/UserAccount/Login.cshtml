@@ -59,11 +59,11 @@
 
             <button type="submit" class="btn btn-primary center-block">Login</button>
         }
-        <div class="mt-3">
-            <a href="#">Forgot Password</a>
-            <span>|</span>
-            <a href="#">Help</a>
-        </div>
+    <div class="mt-3" style="margin-top:20px">
+        @Html.ActionLink("Forget Password", "Forget", new { area = "" }, new { @class = "btn btn-danger navbtn" })
+        <span>|</span>
+        <a href="#">Help</a>
+    </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -17,10 +17,8 @@ namespace Housemate.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Service()
         {
-            this.BuyHistories = new HashSet<BuyHistory>();
-            this.Carts = new HashSet<Cart>();
-            this.OrderDetails = new HashSet<OrderDetail>();
-            this.Orders = new HashSet<Order>();
+            this.BuyRecords = new HashSet<BuyRecord>();
+            this.ServiceRequesteds = new HashSet<ServiceRequested>();
         }
     
         public int service_id { get; set; }
@@ -30,12 +28,8 @@ namespace Housemate.Models
         public Nullable<int> availability { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BuyHistory> BuyHistories { get; set; }
+        public virtual ICollection<BuyRecord> BuyRecords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Carts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<ServiceRequested> ServiceRequesteds { get; set; }
     }
 }

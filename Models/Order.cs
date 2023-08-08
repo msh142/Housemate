@@ -17,24 +17,19 @@ namespace Housemate.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
-            this.OrderHistories = new HashSet<OrderHistory>();
+            this.OrderRecords = new HashSet<OrderRecord>();
         }
     
         public int order_id { get; set; }
         public Nullable<int> customer_id { get; set; }
-        public Nullable<int> product_id { get; set; }
-        public Nullable<int> service_id { get; set; }
-        public Nullable<int> quantity { get; set; }
         public string order_status { get; set; }
         public string feedback { get; set; }
+        public Nullable<System.DateTime> order_date { get; set; }
+        public Nullable<int> cart_id { get; set; }
     
         public virtual CustomerInfo CustomerInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderHistory> OrderHistories { get; set; }
-        public virtual Product Product { get; set; }
-        public virtual Service Service { get; set; }
+        public virtual ICollection<OrderRecord> OrderRecords { get; set; }
+        public virtual Cart Cart { get; set; }
     }
 }

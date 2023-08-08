@@ -28,21 +28,23 @@ namespace Housemate.Models
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<AdminLogin> AdminLogins { get; set; }
         public virtual DbSet<BuyHistory> BuyHistories { get; set; }
+        public virtual DbSet<BuyRecord> BuyRecords { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<CartRecord> CartRecords { get; set; }
         public virtual DbSet<Checkout> Checkouts { get; set; }
         public virtual DbSet<CustomerInfo> CustomerInfoes { get; set; }
         public virtual DbSet<CustomerLogin> CustomerLogins { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<OrderHistory> OrderHistories { get; set; }
+        public virtual DbSet<OrderRecord> OrderRecords { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrderStatu> OrderStatus { get; set; }
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Registered> Registereds { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<ServiceRequested> ServiceRequesteds { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<ShippingAddress> ShippingAddresses { get; set; }
         public virtual DbSet<Wishlist> Wishlists { get; set; }
+        public virtual DbSet<WishlistRecord> WishlistRecords { get; set; }
     }
 }

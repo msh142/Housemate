@@ -1,6 +1,7 @@
 ﻿using Housemate.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -14,16 +15,14 @@ namespace Housemate.Controllers
         hmdbEntities db = new hmdbEntities();
         public ActionResult Index()
         {
-            //SqlConnection conn = new SqlConnection(@"Database=hmdb;Server=G0DZI11A\SQLEXPRESS01;user=sa;password=123456");
-            //conn.Open();
-            //SqlCommand cmd = new SqlCommand();
-            //cmd.Connection = conn;
-            //cmd.CommandText = "";
-
-
-            //conn.Close();
-
-            return View(db.Products.ToList());
+            var products = db.Products.ToList();
+            return View(products);
+        }
+        public ActionResult CategoryView(string category)
+        {
+            ViewBag.category = category;
+            var prod = db.Products.Where(c => c.Category.Contains(category));
+            return View(prod.ToList());
         }
         public ActionResult Details(int? id)
         {
@@ -51,37 +50,111 @@ namespace Housemate.Controllers
             {
                 return HttpNotFound();
             }
-            Cart cart = db.Carts.Where(c => c.product_id == id).SingleOrDefault();
-            if(cart == null || cart.customer_id != int.Parse(Request.Cookies["CustomerID"].Value))
+            if(Request.Cookies["CustomerID"] != null)
             {
-                Cart addcart = new Cart();
-                addcart.customer_id = int.Parse(Request.Cookies["CustomerID"].Value);
-                addcart.product_id = id;
-                addcart.quantity = 1;
-                addcart.Product = product;
-                addcart.price = product.price;
-                addcart.CustomerInfo = customer;
-
-                db.Carts.Add(addcart);
-                db.SaveChanges();
+                Cart cart = db.Carts.FirstOrDefault(c => c.customer_id == customer.customer_id);
+                HttpCookie hc  = new HttpCookie("CartID", cart.cart_id.ToString()); ;
+                Response.Cookies.Add(hc);
+                
+                if (cart == null)
+                {
+                    Cart newCart = new Cart();
+                    HttpCookie cookie = Request.Cookies["CartID"];
+                    cookie.Value = newCart.cart_id.ToString();
+                    Response.Cookies.Set(cookie);
+                    System.Diagnostics.Debug.WriteLine(customer.customer_id);
+                    newCart.customer_id = customer.customer_id;
+                    newCart.price = 0;
+                    db.Carts.Add(newCart);
+                    db.SaveChanges();
+                    CartRecord carR = db.CartRecords.FirstOrDefault(c => (c.cart_id==newCart.cart_id) && (c.product_id == product.product_id) && (c.status.Contains("Pending")));
+                    if(carR == null)
+                    {
+                        CartRecord newCarR = new CartRecord();
+                        newCarR.product_id = product.product_id;
+                        newCarR.cart_id = newCart.cart_id;
+                        newCarR.quantity = 1;
+                        newCarR.status = "PendingPayment";
+                        newCarR.price = product.price;
+                        db.CartRecords.Add(newCarR);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        carR.product_id = product.product_id;
+                        carR.cart_id = cart.cart_id;
+                        carR.quantity = carR.quantity + 1;
+                        carR.price = product.price * carR.quantity;
+                        db.SaveChanges();
+                    }
+                    
+                    
+                }
+                else
+                {
+                    CartRecord carR = db.CartRecords.Where(c => (c.cart_id == cart.cart_id) && (c.product_id == product.product_id) && (c.status.Contains("Pending"))).SingleOrDefault();
+                    HttpCookie cookie = Request.Cookies["CartID"];
+                    cookie.Value = cart.cart_id.ToString();
+                    Response.Cookies.Set(cookie);
+                    if (carR == null)
+                    {
+                        CartRecord newCarR = new CartRecord();
+                        newCarR.product_id = product.product_id;
+                        newCarR.cart_id = cart.cart_id;
+                        newCarR.quantity = 1;
+                        newCarR.price = product.price;
+                        newCarR.status = "PendingPayment";
+                        db.CartRecords.Add(newCarR);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        carR.product_id = product.product_id;
+                        carR.cart_id = cart.cart_id;
+                        carR.quantity = carR.quantity + 1;
+                        carR.price = product.price * carR.quantity;
+                        db.SaveChanges();
+                    }
+                }
             }
             else
             {
-                cart.cart_id = cart.cart_id;
-                cart.customer_id = int.Parse(Request.Cookies["CustomerID"].Value);
-                cart.product_id = id;
-                cart.quantity = cart.quantity + 1;
-                cart.Product = product;
-                cart.price = product.price * cart.quantity;
-                cart.CustomerInfo = customer;
-
-                db.SaveChanges();
+                return RedirectToAction("Login", "UserAccount");
             }
 
-            
             return RedirectToAction("Index", "Carts");
         }
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CustomerInfo customer = db.CustomerInfoes.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username", cart.customer_id);
+            return View(customer);
+        }
 
+        // POST: Carts/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(CustomerInfo customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+           
+            return View(customer);
+        }
 
         public ActionResult About()
         {

@@ -153,7 +153,6 @@ namespace Housemate.Controllers
                 HttpCookie hc2 = new HttpCookie("AdminUsername", ad.username.ToString());
                 Response.Cookies.Add(hc2);
                 //hc1.Expires = DateTime.Now.AddSeconds(10);
-                
 
                 return View("Dashboard");
             }
@@ -167,21 +166,18 @@ namespace Housemate.Controllers
 
         public ActionResult Dashboard()
         {
-            return View();
+            if (Request.Cookies["AdminID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "This page can only accessed by admin";
+                return View("ShowError");
+            }
         }
         public ActionResult Logout()
         {
-            HttpCookie rc = Request.Cookies["AdminEmail"];
-            HttpCookie rc1 = Request.Cookies["AdminUsername"];
-
-            rc.Expires = DateTime.Now.AddSeconds(-1);
-            Response.Cookies.Add(rc);
-            if (rc1 != null)
-            {
-                rc1.Expires = DateTime.Now.AddSeconds(-1);
-                Response.Cookies.Add(rc1);
-            }
-
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }
@@ -206,7 +202,11 @@ namespace Housemate.Controllers
         {
             return RedirectToAction("Index", "Products");
         }
-
+        public ActionResult ShowError()
+        {
+            ViewBag.ErrorMessage = " ";
+            return View();
+        }
 
 
 

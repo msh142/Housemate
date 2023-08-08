@@ -26,7 +26,8 @@
     }
 
     .product-image {
-        width: 100%;
+        height:250px;
+        width:250px;
         min-height: 250px;
         object-fit: cover;
         border-radius: 5px;
@@ -134,6 +135,7 @@
                 </h3>
                 <p class="product-description">@Html.DisplayFor(modelItem => item.description)</p>
                 <p class="product-price">৳@Html.DisplayFor(modelItem => item.price)</p>
+                <p class="product-quantity" style="color:grey">Qty.:@Html.DisplayFor(modelItem => item.availability)</p>
                 @Html.ActionLink("Add to Wishlist", "Index", "Home", new { id = item.product_id }, new { @class = "btn btn-warning navbtn", @style = "display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;" })
                 @Html.ActionLink("Add to Cart", "AddToCart", "Home", new { id = item.product_id }, new { @class = "btn btn-success navbtn", @style = "display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;" })
                 @Html.ActionLink("Buy Now", "Index", "Home", new { id = item.product_id }, new { @class = "btn btn-primary navbtn", @style = "display: block; width: 100%; margin-bottom: 5px; padding: 8px 0; color: #fff; border: none; border-radius: 5px;" })

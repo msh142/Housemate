@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Forget";
+    Layout = "~/Views/Shared/RegisterLogin.cshtml";
+}
+<style>
+
+</style>
+<div class="container-fluid center-container body">
+    <h2>Forget Password</h2>
+
+    @using (Html.BeginForm("Forget", "UserAccount", FormMethod.Post))
+    {
+        <div>
+            <label for="emaile">Email:</label>
+            <input type="text" id="email" name="email" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success navbtn" style="margin-top:10px;">Submit</button>
+        </div>
+    }
+
+    <div style="margin-top:10px;">
+        @Html.ActionLink("Return to Login", "Login",new {area ="" }, new { @class = "btn btn-warning navbtn"})
+    </div>
+</div>
+
+

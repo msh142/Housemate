@@ -1,6 +1,8 @@
-﻿@model IEnumerable<Housemate.Models.Cart>
+﻿@model IEnumerable<Housemate.Models.CartRecord>
 
 @{
+    decimal? subtotalPrice = 0;
+    ViewBag.subtotal = Convert.ToDecimal( 0.00);
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -20,11 +22,6 @@
             align-content: center;
             max-height: 200px;
             min-width: 200px;
-        }
-
-        .product-image {
-            width: 100px;
-            height: auto;
         }
 
         .product-name {
@@ -58,13 +55,28 @@
         body {
             background-repeat: no-repeat;
             background-size: cover;
-            background-color: darkslategray;
+            background-color: white;
+        }
+        .line {
+            background-color: dimgray;
+            height: 2px;
         }
     </style>
 
     <script>
         function updateTotalPrice(row) {
             const quantityInput = row.querySelector(".quantity-input");
+            const unitPriceCell = row.querySelector(".unit-price");
+            const totalPriceCell = row.querySelector(".total-price");
+
+            const quantity = parseInt(quantityInput.value);
+            const unitPrice = parseFloat(unitPriceCell.textContent.slice(1)); // Assuming price format: $XX.XX
+            const totalPrice = quantity * unitPrice;
+
+            totalPriceCell.textContent = "৳" + totalPrice.toFixed(2);
+        }
+        function updateSubotalPrice(row) {
+            const quantityInput = row.querySelector(".");
             const unitPriceCell = row.querySelector(".unit-price");
             const totalPriceCell = row.querySelector(".total-price");
 
@@ -90,12 +102,14 @@
     </script>
 </head>
 
-<h2 style="color:white; "><b>My Cart</b></h2>
+<h2 style="color: navy; "><b>My Cart</b></h2>
 
 
 <table class="table">
     @foreach (var item in Model)
     {
+        subtotalPrice = subtotalPrice + item.price;
+        ViewBag.subtotal = subtotalPrice;
         <tr>
             <td>
                 <div class="container-fluid center-block">
@@ -111,13 +125,13 @@
                         </div>
                         <div class="col-md-3">
                             <input class="quantity-input" name="quantityInput" type="number" min="1" value="@Url.Content(item.quantity.Value.ToString())" onchange="updateTotalPrice(this.parentElement.parentElement);" max=@Url.Content(item.Product.availability.Value.ToString())>
-                            <button onclick="UpdateQuantity('@item.cart_id', this.parentElement.querySelector('.quantity-input').value)">Update</button>
+                            <button onclick="UpdateQuantity('@item.cr', this.parentElement.querySelector('.quantity-input').value)">Update</button>
                         </div>
                         <div class="col-md-2">
                             <p class="total-price">৳@item.price</p>
                         </div>
                         <div class="col-md-2">
-                            @Html.ActionLink("Remove", "Delete", new { id = item.cart_id }, new { @class = "btn btn-danger" })
+                            @Html.ActionLink("Remove", "Delete", new { id = item.product_id }, new { @class = "btn btn-danger" })
                         </div>
 
                     </div>
@@ -126,4 +140,17 @@
         </tr>
     }
 </table>
+<div class="line">
+
+</div>
+<div>
+    <h3  style="color:black; font-weight:bold;">Subtotal<p  class="subtotal" style="color:black;text-align:right; font-weight:bold;">৳@ViewBag.subtotal</p></h3>
+    <p style="text-align:right; color:red">*Please reload the page to see the updated price</p>
+</div>
+<div style="position: absolute; right: 20px;">
+    @Html.ActionLink("Checkout", "Index", "Checkouts", new {area = "" }, new { @class = "btn btn-warning navbtn" , @style= "margin-top:10px;height:50px; width:120px; font-size:20px; padding:10px;" })
+</div>
+<div class="line">
+
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

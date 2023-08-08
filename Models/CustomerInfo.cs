@@ -25,6 +25,7 @@ namespace Housemate.Models
             this.PaymentMethods = new HashSet<PaymentMethod>();
             this.Registereds = new HashSet<Registered>();
             this.Reviews = new HashSet<Review>();
+            this.ServiceRequesteds = new HashSet<ServiceRequested>();
             this.ShippingAddresses = new HashSet<ShippingAddress>();
             this.Wishlists = new HashSet<Wishlist>();
         }
@@ -59,6 +60,8 @@ namespace Housemate.Models
         public virtual ICollection<Registered> Registereds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Reviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ServiceRequested> ServiceRequesteds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShippingAddress> ShippingAddresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

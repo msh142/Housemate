@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Housemate.Models.PaymentMethod>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.card_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cardholder_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expiration_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cvv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.is_default)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerInfo.username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.card_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cardholder_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.expiration_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cvv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.is_default)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerInfo.username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.payment_method_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.payment_method_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.payment_method_id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -22,41 +22,38 @@ namespace Housemate.Controllers
             {
                 string customerIDValue = Request.Cookies["CustomerID"].Value;
                 customerID = Convert.ToInt32(customerIDValue);
-            }
-            var carts = (from c in db.Carts
-                         where (c.customer_id == customerID)
-                         select c);
 
-            return View(carts.ToList());
-        }
+                Cart carts = (from c in db.Carts
+                              where (c.customer_id == customerID)
+                              select c).SingleOrDefault();
+                var carR = from c in db.CartRecords
+                           where (c.cart_id == carts.cart_id) && (c.status == "PendingPayment")
+                           select c;
+                if (!carR.Any())
+                {
+                    carts.price = Convert.ToDecimal(0);
+                }
+                else
+                {
+                    carts.price = 0;
+                    foreach (var item in carR)
+                    {
+                        carts.price = carts.price + item.price;
+                    }
+                }
 
-        [HttpPost]
-        public ActionResult UpdateQuantity(int cartId, int quantity)
-        {
-            // Retrieve the cart item from the database
-            var cartItem = db.Carts.Find(cartId);
-            Product product = db.Products.Where(c => c.product_id.Equals(cartItem.product_id.Value)).SingleOrDefault();
-            if (cartItem != null)
-            {
-                // Update the quantity column
-                cartItem.cart_id = cartId;
-                cartItem.quantity = quantity;
-                cartItem.price = product.price.Value * quantity;
-                System.Diagnostics.Debug.WriteLine("\n\nQuantity " + quantity + "\n\n");
-                // Save changes to the database
                 db.SaveChanges();
-            }
-            int customerID = 0;
-            if (Request.Cookies["CustomerID"].Value != null)
-            {
-                string customerIDValue = Request.Cookies["CustomerID"].Value;
-                customerID = Convert.ToInt32(customerIDValue);
-            }
-            var carts = (from c in db.Carts
-                         where (c.customer_id == customerID)
-                         select c);
 
-            return View("Index", carts.ToList());
+                if (carR != null)
+                {
+                    return View(carR.ToList());
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            return RedirectToAction("Login","UserAccount");
         }
 
         // GET: Carts/Details/5
@@ -66,7 +63,7 @@ namespace Housemate.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cart cart = db.Carts.Find(id);
+            CartRecord cart = db.CartRecords.Find(id);
             if (cart == null)
             {
                 return HttpNotFound();
@@ -78,8 +75,6 @@ namespace Housemate.Controllers
         public ActionResult Create()
         {
             ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username");
-            ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name");
-            ViewBag.service_id = new SelectList(db.Services, "service_id", "service_name");
             return View();
         }
 
@@ -88,7 +83,7 @@ namespace Housemate.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cart_id,customer_id,product_id,service_id,quantity,price")] Cart cart)
+        public ActionResult Create([Bind(Include = "cart_id,customer_id,price")] Cart cart)
         {
             if (ModelState.IsValid)
             {
@@ -98,9 +93,51 @@ namespace Housemate.Controllers
             }
 
             ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username", cart.customer_id);
-            ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name", cart.product_id);
-            ViewBag.service_id = new SelectList(db.Services, "service_id", "service_name", cart.service_id);
             return View(cart);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateQuantity(int cartId, int quantity)
+        {
+            // Retrieve the cart item from the database
+            var cartItem = db.CartRecords.Find(cartId);
+            Product product = db.Products.Where(c => c.product_id.Equals(cartItem.product_id.Value)).SingleOrDefault();
+            if (cartItem != null)
+            {
+                // Update the quantity column
+                cartItem.quantity = quantity;
+                cartItem.price = product.price.Value * quantity;
+                cartItem.status = "PendingPayment";
+                System.Diagnostics.Debug.WriteLine("\n\nQuantity " + quantity + "\n\n");
+                // Save changes to the database
+                db.SaveChanges();
+            }
+            int customerID = 0;
+            if (Request.Cookies["CustomerID"].Value != null)
+            {
+                string customerIDValue = Request.Cookies["CustomerID"].Value;
+                customerID = Convert.ToInt32(customerIDValue);
+            }
+            Cart carts = (from c in db.Carts
+                          where (c.customer_id == customerID)
+                          select c).SingleOrDefault();
+            var carR = (from c in db.CartRecords
+                        where (c.cart_id == carts.cart_id)
+                        select c);
+            if (!carR.Any())
+            {
+                carts.price = Convert.ToDecimal(0);
+            }
+            else
+            {
+                carts.price = Convert.ToDecimal(0);
+                foreach (var item in carR)
+                {
+                    carts.price = carts.price + item.price;
+                }
+            }
+
+            return RedirectToAction("Index", carR.ToList());
         }
 
         // GET: Carts/Edit/5
@@ -110,14 +147,12 @@ namespace Housemate.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cart cart = db.Carts.Find(id);
+            CartRecord cart = db.CartRecords.Find(id);
             if (cart == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username", cart.customer_id);
-            ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name", cart.product_id);
-            ViewBag.service_id = new SelectList(db.Services, "service_id", "service_name", cart.service_id);
+            //ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username", cart.customer_id);
             return View(cart);
         }
 
@@ -126,7 +161,7 @@ namespace Housemate.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cart_id,customer_id,product_id,service_id,quantity,price")] Cart cart)
+        public ActionResult Edit([Bind(Include = "cart_id,customer_id,price")] Cart cart)
         {
             if (ModelState.IsValid)
             {
@@ -135,33 +170,22 @@ namespace Housemate.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username", cart.customer_id);
-            ViewBag.product_id = new SelectList(db.Products, "product_id", "product_name", cart.product_id);
-            ViewBag.service_id = new SelectList(db.Services, "service_id", "service_name", cart.service_id);
             return View(cart);
         }
 
         // GET: Carts/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
+            Product prod = db.Products.Find(id);
+            CartRecord cart = db.CartRecords.Where(c => c.product_id == prod.product_id).FirstOrDefault();
+            db.CartRecords.Remove(cart);
+            IEnumerable<CartRecord> cartR = db.CartRecords.Where(c => c.cart_id == cart.cart_id).ToList();
+            if(cartR == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Cart c = db.Carts.Where(a => a.cart_id == cart.cart_id).FirstOrDefault();
+                db.Carts.Remove(c);
             }
-            Cart cart = db.Carts.Find(id);
-            if (cart == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cart);
-        }
-
-        // POST: Carts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Cart cart = db.Carts.Find(id);
-            db.Carts.Remove(cart);
+            
             db.SaveChanges();
             return RedirectToAction("Index");
         }

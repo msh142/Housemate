@@ -17,20 +17,21 @@ namespace Housemate.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cart()
         {
+            this.CartRecords = new HashSet<CartRecord>();
             this.Checkouts = new HashSet<Checkout>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int cart_id { get; set; }
         public Nullable<int> customer_id { get; set; }
-        public Nullable<int> product_id { get; set; }
-        public Nullable<int> service_id { get; set; }
-        public Nullable<int> quantity { get; set; }
         public Nullable<decimal> price { get; set; }
     
         public virtual CustomerInfo CustomerInfo { get; set; }
-        public virtual Product Product { get; set; }
-        public virtual Service Service { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartRecord> CartRecords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Checkout> Checkouts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

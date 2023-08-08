@@ -69,7 +69,7 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.admin_id }) |
-                @if (Request.Cookies["AdminUsername"].Value == "admin")
+                @if (Request.Cookies["AdminUsername"] != null && Request.Cookies["AdminUsername"].Value == "admin")
                 {
                     @Html.ActionLink("Delete", "Delete", new { id = item.admin_id })
                 }

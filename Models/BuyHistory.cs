@@ -14,15 +14,19 @@ namespace Housemate.Models
     
     public partial class BuyHistory
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BuyHistory()
+        {
+            this.BuyRecords = new HashSet<BuyRecord>();
+        }
+    
         public int history_id { get; set; }
         public Nullable<int> customer_id { get; set; }
-        public Nullable<int> product_id { get; set; }
-        public Nullable<int> service_id { get; set; }
         public Nullable<int> quantity { get; set; }
         public Nullable<System.DateTime> purchase_date { get; set; }
     
         public virtual CustomerInfo CustomerInfo { get; set; }
-        public virtual Product Product { get; set; }
-        public virtual Service Service { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BuyRecord> BuyRecords { get; set; }
     }
 }

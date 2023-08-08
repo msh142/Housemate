@@ -1,0 +1,93 @@
+﻿@model Housemate.Models.PaymentMethod
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style>
+        #paymentDetails {
+            opacity: 1;
+            transition: opacity 0.5s ease; /* Add a transition for opacity */
+        }
+
+            /* Hide the payment details when opacity is 0 */
+            #paymentDetails.hidden {
+                opacity: 0;
+                pointer-events: none; /* Disable interaction when hidden */
+            }
+    </style>
+</head>
+
+
+
+@using (Html.BeginForm("Create", "PaymentMethods", FormMethod.Post, new { @class = "container" }))
+{
+    @Html.AntiForgeryToken()
+    <h2>Select Payment Method</h2>
+    <div class="form-group">
+        @Html.RadioButton("PaymentMethod", "creditCard", new { id = "creditCardRadio" }) Credit Card
+        @Html.RadioButton("PaymentMethod", "cod", new { id = "codRadio" }) Cash on Delivery
+    </div>
+    <div id="paymentDetails" class="form-horizontal hidden">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.card_number, "Card Number:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.card_number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.card_number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cardholder_name, "Card Holder Name:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cardholder_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cardholder_name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.expiration_date, "Expiration Date:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.expiration_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.expiration_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cvv, "CVV", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cvv, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cvv, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Back to Cart", "Index", new { area = "" }, new { @class = "btn btn-danger navbtn", @style = "height:50px; width:120px;font-size:large;padding:10px;" })
+           <input type="submit" value="Create" class="btn btn-success navbtn" style = "height:50px; width:120px;font-size:large;padding:10px;"/>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var creditCardRadio = $("#creditCardRadio");
+            var paypalRadio = $("#codRadio");
+            var paymentDetailsDiv = $("#paymentDetails");
+
+            creditCardRadio.on("click", function () {
+                paymentDetailsDiv.removeClass("hidden");
+            });
+
+            paypalRadio.on("click", function () {
+                paymentDetailsDiv.addClass("hidden");
+            });
+        });
+    </script>
+}
+
+

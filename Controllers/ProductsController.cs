@@ -39,7 +39,10 @@ namespace Housemate.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            return View();
+            var lastAddedProduct = db.Products.OrderByDescending(p => p.product_id).FirstOrDefault();
+            Product prod = new Product();
+            prod.product_id = lastAddedProduct.product_id + 1;
+            return View(prod);
         }
 
         // POST: Products/Create
@@ -50,6 +53,7 @@ namespace Housemate.Controllers
         public ActionResult Create(Product product, HttpPostedFileBase ImageFile)
         {
             Product prod = new Product();
+            
             prod = product;
             if (ModelState.IsValid)
             {
@@ -63,7 +67,6 @@ namespace Housemate.Controllers
                     filename = Path.Combine(Server.MapPath("~/img/products/"), filename);
                     ImageFile.SaveAs(filename);
                 }
-
                 db.Products.Add(prod);
                 db.SaveChanges();
                 return RedirectToAction("Index");

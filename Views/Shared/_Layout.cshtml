@@ -1,5 +1,8 @@
-﻿@{ 
-    ViewBag.customerID = int.Parse(Request.Cookies["CustomerID"].Value);
+﻿@{
+    if (Request.Cookies["CustomerID"] != null)
+    {
+        ViewBag.customerID = int.Parse(Request.Cookies["CustomerID"].Value);
+    }
 }
 
 <!DOCTYPE html>
@@ -86,31 +89,8 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-left">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white">Products <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Furniture", "Category1", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Home Decoration", "Category2", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Kitchen & Dining", "Category3", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Bed & Bath", "Category4", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Appliences", "Category5", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Home Improvement", "Category6", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Outdoor & Garden", "Category7", "Home", new { area = "" }, new { })</li>
-
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white">Services <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Home Cleaning", "Service1", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Maintanance & Repairs", "Service2", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Home Security", "Service3", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Home Improvement", "Service4", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Pest Control", "Service5", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Interior Designing & Styling", "Service6", "Home", new { area = "" }, new { })</li>
-                            <li>@Html.ActionLink("Moving & Packaging", "Service7", "Home", new { area = "" }, new { })</li>
-                        </ul>
-                    </li>
+                    <li>@Html.ActionLink("Products", "About", "Home", new { area = "" }, new { @style = "color:white;" })</li>
+                    <li>@Html.ActionLink("Services", "About", "Home", new { area = "" }, new { @style = "color:white;" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @style = "color:white;" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @style = "color:white;" })</li>
                 </ul>
@@ -169,25 +149,25 @@
                             <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 22px; margin-left: 20px;margin-top:20px; color: white">--Products--</h4>
                             <ul style="margin-top: 20px; background-color: #418171; ">
                                 <li class="list-group-item btn-hover">
-                                    <button class="cat">Furniture</button>
+                                    @Html.ActionLink("Furniture", "CategoryView", "Home", new { category = "Furniture" }, new { @class = "btn cat" })
                                 </li>
                                 <li class="list-group-item btn-hover">
-                                    <button class="cat">Home Decor</button>
+                                    @Html.ActionLink("Home Decor", "CategoryView", "Home", new { category = "Home Decor" }, new { @class = "btn cat" })
                                 </li>
                                 <li class="list-group-item btn-hover">
-                                    <button class="cat">Kitchen & Dining</button>
+                                    @Html.ActionLink("Kitchen & Dining", "CategoryView", "Home", new { category = "Kitchen & Dining" }, new { @class = "btn cat" })
                                 </li>
                                 <li class="list-group-item btn-hover">
-                                    <button class="cat">Bed & Bath</button>
+                                    @Html.ActionLink("Bed & Bath", "CategoryView", "Home", new { category = "Bed & Bath" }, new { @class = "btn cat" })
                                 </li>
                                 <li class="list-group-item btn-hover">
-                                    <button class="cat">Appliances</button>
+                                    @Html.ActionLink("Appliances", "CategoryView", "Home", new { category = "Appliances" }, new { @class = "btn cat" })
                                 </li>
                                 <li class="list-group-item btn-hover">
-                                    <button class="cat">Home Improvement</button>
+                                    @Html.ActionLink("Home Improvement", "CategoryView", "Home", new { category = "Home Improvement" }, new { @class = "btn cat" })
                                 </li>
                                 <li class="list-group-item btn-hover">
-                                    <button class="cat">Outdoor & Garden</button>
+                                    @Html.ActionLink("Outdoor & Garden", "CategoryView", "Home", new { category = "Outdoor & Garden" }, new { @class = "btn cat" })
                                 </li>
                             </ul>
                         </li>

@@ -12,17 +12,13 @@ namespace Housemate.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetail
+    public partial class OrderRecord
     {
-        public int order_details_id { get; set; }
+        public int or_id { get; set; }
         public Nullable<int> order_id { get; set; }
         public Nullable<int> product_id { get; set; }
-        public Nullable<int> service_id { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public Nullable<decimal> price { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
-        public virtual Service Service { get; set; }
     }
 }
