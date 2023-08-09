@@ -56,7 +56,7 @@ namespace Housemate.Controllers
             int customer_id = int.Parse(Request.Cookies["CustomerID"].Value);
             ShippingAddress address = db.ShippingAddresses.Where(c => c.customer_id == customer_id).FirstOrDefault();
             Cart cart = db.Carts.FirstOrDefault(c => c.customer_id == customer_id);
-            int? cart_id = db.CartRecords.FirstOrDefault(c => c.cart_id == cart.cart_id && c.status == "Pending").cart_id;
+            int cart_id = cart.cart_id;
             Order order = new Order();
             if (Request.Cookies["CustomerID"] != null)
             {
@@ -153,6 +153,7 @@ namespace Housemate.Controllers
             foreach(var item in carR)
             {
                 item.status = "Processing";
+                db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
             }
             return View();

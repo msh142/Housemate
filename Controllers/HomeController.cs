@@ -24,6 +24,17 @@ namespace Housemate.Controllers
             var prod = db.Products.Where(c => c.Category.Contains(category));
             return View(prod.ToList());
         }
+        public ActionResult Search(string searchString)
+        {
+            var prod = from c in db.Products select c;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                prod = prod.Where(c => c.product_name.Contains(searchString) || c.Category.Contains(searchString) || c.description.Contains(searchString));
+            };
+
+
+            return View("CategoryView", prod.ToList());
+        }
         public ActionResult Details(int? id)
         {
             if (id == null)

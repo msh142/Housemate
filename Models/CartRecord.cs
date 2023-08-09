@@ -11,14 +11,20 @@ namespace Housemate.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CartRecord
     {
         public int cr { get; set; }
+        [Display(Name = "Cart ID")]
         public Nullable<int> cart_id { get; set; }
+        [Display(Name = "Product ID")]
         public Nullable<int> product_id { get; set; }
+        [Display(Name = "Quantity")]
         public Nullable<int> quantity { get; set; }
+        [Display(Name = "Price")]
         public Nullable<decimal> price { get; set; }
+        [Display(Name = "Status")]
         public string status { get; set; }
     
         public virtual Cart Cart { get; set; }

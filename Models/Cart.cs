@@ -11,7 +11,8 @@ namespace Housemate.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Cart
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +22,12 @@ namespace Housemate.Models
             this.Checkouts = new HashSet<Checkout>();
             this.Orders = new HashSet<Order>();
         }
-    
+        [Required(ErrorMessage = "*Username cannot be empty.")]
+        [Display(Name = "Cart ID")]
         public int cart_id { get; set; }
+        [Display(Name = "Customer ID")]
         public Nullable<int> customer_id { get; set; }
+        [Display(Name = "Price")]
         public Nullable<decimal> price { get; set; }
     
         public virtual CustomerInfo CustomerInfo { get; set; }

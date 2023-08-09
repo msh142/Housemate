@@ -85,11 +85,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Homemate", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Housemate", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-left">
-                    <li>@Html.ActionLink("Products", "About", "Home", new { area = "" }, new { @style = "color:white;" })</li>
+                    <li>@Html.ActionLink("Products", "CategoryView", "Home", new { category = "" }, new { @style = "color:white;" })</li>
                     <li>@Html.ActionLink("Services", "About", "Home", new { area = "" }, new { @style = "color:white;" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @style = "color:white;" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @style = "color:white;" })</li>
@@ -126,11 +126,20 @@
                             @Html.ActionLink(" ", "Logout", "UserAccount", new { area = "" }, new { @class = "btn btn-danger glyphicon glyphicon-off navbtn", @style = "color:white;" })
                         </li>
                     }
-                    <li style="padding-top:4px;">
-                        <form class="form-inline my-2 my-lg-0" style="margin-top: 10px;">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
+                    <li style="padding-top:10px;">
+                        <div class="container-fluid"style=" width:300px">
+                            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+                            {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Search by name or category", @style = "width:150px" })
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </div>
+                            </div> 
+                            }
+                        </div>
                     </li>
                 </ul>
             </div>

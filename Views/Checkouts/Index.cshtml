@@ -116,7 +116,7 @@
             <p>@ViewBag.address.city, @ViewBag.address, @ViewBag.address.city-@ViewBag.address.postal_code, @ViewBag.address.country</p>
         }
         <div style="margin-top:5px;">
-            @Html.ActionLink("Change Address", "Create", "ShippingAddresses", new { id = @ViewBag.customer.customer_id }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Change Address", "Edit", "ShippingAddresses", new { id = @ViewBag.customer.customer_id }, new { @class = "btn btn-success" })
         </div>
     </div>
     <div class="selected-products">
