@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Housemate.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Housemate.Models;
 
 namespace Housemate.Controllers
 {
     public class PaymentMethodsController : Controller
     {
+        int or_id;
         private hmdbEntities db = new hmdbEntities();
 
         // GET: PaymentMethods
@@ -51,7 +51,7 @@ namespace Housemate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "payment_method_id,customer_id,card_number,cardholder_name,expiration_date,cvv,is_default")] PaymentMethod paymentMethod, FormCollection form)
         {
-            
+
             string payment = form["PaymentMethod"];
             int customer_id = int.Parse(Request.Cookies["CustomerID"].Value);
             ShippingAddress address = db.ShippingAddresses.Where(c => c.customer_id == customer_id).FirstOrDefault();
@@ -65,7 +65,6 @@ namespace Housemate.Controllers
 
                     if (payment == "cerditCard")
                     {
-                        System.Diagnostics.Debug.WriteLine("Credit Cart");
                         PaymentMethod pm = db.PaymentMethods.Where(c => c.customer_id == customer_id).FirstOrDefault();
                         if (pm == null)
                         {
@@ -81,14 +80,14 @@ namespace Housemate.Controllers
                             order.order_date = DateTime.Now;
                             order.order_status = "Paid";
                             order.feedback = " ";
-                            System.Diagnostics.Debug.WriteLine(order.customer_id);
-                            System.Diagnostics.Debug.WriteLine(order.cart_id);
-                            System.Diagnostics.Debug.WriteLine(order.order_date);
-                            System.Diagnostics.Debug.WriteLine(order.order_status);
-                            System.Diagnostics.Debug.WriteLine(order.feedback);
                             db.Orders.Add(order);
                             db.SaveChanges();
-                            System.Diagnostics.Debug.WriteLine("Order Placed");
+                            List<Order> o = db.Orders.Where(c => c.order_status == "Paid" || c.order_status == "COD").ToList();
+                            foreach (var item in o)
+                            {
+                                or_id = item.order_id;
+                            }
+                            SaveOrder();
                             return RedirectToAction("Success");
                         }
                         else
@@ -98,35 +97,34 @@ namespace Housemate.Controllers
                             order.order_date = DateTime.Now;
                             order.order_status = "Paid";
                             order.feedback = " ";
-                            System.Diagnostics.Debug.WriteLine(order.customer_id);
-                            System.Diagnostics.Debug.WriteLine(order.cart_id);
-                            System.Diagnostics.Debug.WriteLine(order.order_date);
-                            System.Diagnostics.Debug.WriteLine(order.order_status);
-                            System.Diagnostics.Debug.WriteLine(order.feedback);
                             db.Orders.Add(order);
                             db.SaveChanges();
-                            System.Diagnostics.Debug.WriteLine("Order Placed");
+                            List<Order> o = db.Orders.Where(c => c.order_status == "Paid" || c.order_status == "COD").ToList();
+                            foreach (var item in o)
+                            {
+                                or_id = item.order_id;
+                            }
+                            SaveOrder();
                             return RedirectToAction("Success");
                         }
 
                     }
                     else if (payment == "cod")
                     {
-                        System.Diagnostics.Debug.WriteLine("Cash on Delivery");
-                        
+
                         order.customer_id = int.Parse(Request.Cookies["CustomerID"].Value);
                         order.cart_id = cart_id;
                         order.order_date = DateTime.Now;
                         order.order_status = "COD";
                         order.feedback = " ";
-                        System.Diagnostics.Debug.WriteLine(order.customer_id);
-                        System.Diagnostics.Debug.WriteLine(order.cart_id);
-                        System.Diagnostics.Debug.WriteLine(order.order_date);
-                        System.Diagnostics.Debug.WriteLine(order.order_status);
-                        System.Diagnostics.Debug.WriteLine(order.feedback);
                         db.Orders.Add(order);
                         db.SaveChanges();
-                        System.Diagnostics.Debug.WriteLine("Order Placed");
+                        List<Order> o = db.Orders.Where(c => c.order_status == "Paid" || c.order_status == "COD").ToList();
+                        foreach(var item in o)
+                        {
+                            or_id = item.order_id;
+                        }
+                        SaveOrder();
                         return RedirectToAction("Success");
                     }
                     else
@@ -147,17 +145,25 @@ namespace Housemate.Controllers
 
         public ActionResult Success()
         {
-            int customer_id = int.Parse(Request.Cookies["CustomerID"].Value);
-            Cart cart = db.Carts.FirstOrDefault(c => c.customer_id == customer_id);
-            var carR = db.CartRecords.Where(c =>c.cart_id == cart.cart_id && c.status == "PaymentPending").ToList();
-            foreach(var item in carR)
-            {
-                item.status = "Processing";
-                db.Entry(item).State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            
             return View();
         }
+
+        public void SaveOrder()
+        {
+            int customer_id = int.Parse(Request.Cookies["CustomerID"].Value);
+            Cart cart = db.Carts.FirstOrDefault(c => c.customer_id == customer_id);
+            IEnumerable<CartRecord> carR = db.CartRecords.Where(c => c.cart_id == cart.cart_id && c.status == "Pending").ToList();
+            foreach (var item in carR)
+            {
+                CartRecord car = db.CartRecords.Find(item.cr);
+                car.status = "Processing";
+                car.order_id = or_id;
+                db.Entry(car).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
 
         // GET: PaymentMethods/Edit/5
         public ActionResult Edit(int? id)

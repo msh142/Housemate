@@ -106,7 +106,7 @@
                     @if (Request.Cookies["AdminUsername"] != null)
                     {
                         <li style="padding-top: 5px; padding-right: 5px;" class="text-white">
-                            @Html.ActionLink(" ", "Edit", new { id = int.Parse(Request.Cookies["AdminID"].Value) }, new { @class = "btn btn-warning glyphicon glyphicon-user navbtn", @style = "color:white;" })
+                            @Html.ActionLink(" ", "Edit","Admins", new { id = int.Parse(Request.Cookies["AdminID"].Value) }, new { @class = "btn btn-warning glyphicon glyphicon-user navbtn", @style = "color:white;" })
                         </li>
                     }
 
@@ -136,13 +136,7 @@
                                     @Html.ActionLink("Add", "Create", "Products", new { area = "" },  new { @class = "btn navbtn", @style = "color:white; text-align: left; width: 150px" })
                                 </li>
                                 <li class="list-group-item btn-hover">
-                                    @Html.ActionLink("View", "Index", "Products", new { area = "" }, new { @class = "btn navbtn", @style = "color:white; text-align: left; width: 150px" })
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    @Html.ActionLink("Update", "Index", "Products", new { area = "" }, new { @class = "btn navbtn", @style = "color:white; text-align: left; width: 150px" })
-                                </li>
-                                <li class="list-group-item btn-hover">
-                                    @Html.ActionLink("Remove", "Index", "Products", new { area = "" }, new { @class = "btn navbtn", @style = "color:white; text-align: left; width: 150px" })
+                                    @Html.ActionLink("Update Product", "Index", "Products", new { area = "" }, new { @class = "btn navbtn", @style = "color:white; text-align: left; width: 150px" })
                                 </li>
                             </ul>
                         </li>
@@ -157,6 +151,9 @@
                                 </li>
                                 <li class="list-group-item btn-hover">
                                     @Html.ActionLink("Rejected Orders", "RejectedOrder", "Orders", new { area = "" }, new { @class = "btn", @style = "color:white; text-align: left; width: 150px" })
+                                </li>
+                                <li class="list-group-item btn-hover">
+                                    @Html.ActionLink("Cancelled Orders", "CancelledOrder", "Orders", new { area = "" }, new { @class = "btn", @style = "color:white; text-align: left; width: 150px" })
                                 </li>
                                 <li class="list-group-item btn-hover">
                                     @Html.ActionLink("All Orders", "AllOrders", "Orders", new { area = "" }, new { @class = "btn", @style = "color:white; text-align: left; width: 150px" })

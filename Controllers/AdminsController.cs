@@ -131,6 +131,10 @@ namespace Housemate.Controllers
         ///////////////////////////////////////////////////////////////////////////////////////////////
         public ActionResult Login()
         {
+            if (Request.Cookies["AdminID"] != null)
+            {
+                return RedirectToAction("Dashboard", "Admins");
+            }
             return View();
         }
         [HttpPost]
@@ -142,9 +146,6 @@ namespace Housemate.Controllers
             
             if (ad != null)
             {
-                HttpCookie hc4 = new HttpCookie("login", "True");
-                Response.Cookies.Add(hc4);
-                hc4.Expires = DateTime.Now.AddSeconds(5);
                 HttpCookie hc = new HttpCookie("AdminID", ad.admin_id.ToString());
                 Response.Cookies.Add(hc);
                 //hc.Expires = DateTime.Now.AddSeconds(10);
@@ -153,7 +154,7 @@ namespace Housemate.Controllers
                 HttpCookie hc2 = new HttpCookie("AdminUsername", ad.username.ToString());
                 Response.Cookies.Add(hc2);
                 //hc1.Expires = DateTime.Now.AddSeconds(10);
-
+                ViewBag.Alogin = true;
                 return View("Dashboard");
             }
             else
@@ -178,6 +179,21 @@ namespace Housemate.Controllers
         }
         public ActionResult Logout()
         {
+            HttpCookie rc = Request.Cookies["AdminID"];
+            HttpCookie rc1 = Request.Cookies["AdminUsername"];
+            HttpCookie rc2 = Request.Cookies["AdminEmail"];
+
+            rc.Expires = DateTime.Now.AddSeconds(-1);
+            Response.Cookies.Add(rc);
+            if (rc != null)
+            {
+                rc.Expires = DateTime.Now.AddSeconds(-1);
+                Response.Cookies.Add(rc);
+                rc1.Expires = DateTime.Now.AddSeconds(-1);
+                Response.Cookies.Add(rc1);
+                rc2.Expires = DateTime.Now.AddSeconds(-1);
+                Response.Cookies.Add(rc2);
+            }
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }

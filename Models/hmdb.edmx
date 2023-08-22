@@ -64,6 +64,7 @@
           <Property Name="quantity" Type="int" />
           <Property Name="price" Type="decimal" Precision="10" Scale="2" />
           <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="order_id" Type="int" />
         </EntityType>
         <EntityType Name="Checkout">
           <Key>
@@ -744,6 +745,7 @@
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Cart" Relationship="Self.FK__CartRecor__cart___0BB1B5A5" FromRole="CartRecord" ToRole="Cart" />
           <NavigationProperty Name="Product" Relationship="Self.FK__CartRecor__produ__0CA5D9DE" FromRole="CartRecord" ToRole="Products" />
+          <Property Name="order_id" Type="Int32" />
         </EntityType>
         <EntityType Name="Checkout">
           <Key>
@@ -1450,6 +1452,7 @@
           <EntitySetMapping Name="CartRecords">
             <EntityTypeMapping TypeName="hmdbModel.CartRecord">
               <MappingFragment StoreEntitySet="CartRecord">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="cr" ColumnName="cr" />
                 <ScalarProperty Name="cart_id" ColumnName="cart_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />

@@ -29,7 +29,7 @@ namespace Housemate.Controllers
                         where c.customer_id == customer.customer_id
                         select c).SingleOrDefault();
             System.Diagnostics.Debug.WriteLine(cart.cart_id);
-            List<CartRecord> cr = db.CartRecords.Where(c => c.cart_id == cart.cart_id).ToList();
+            List<CartRecord> cr = db.CartRecords.Where(c => c.cart_id == cart.cart_id && c.status == "Pending").ToList();
             foreach (var item in cr)
             {
                 System.Diagnostics.Debug.WriteLine(item.product_id);

@@ -11,8 +11,7 @@ namespace Housemate.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Admin
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,28 +19,14 @@ namespace Housemate.Models
         {
             this.AdminLogins = new HashSet<AdminLogin>();
         }
-
-        [Key]
-        [ScaffoldColumn(false)]
+    
         public int admin_id { get; set; }
-        [Required(ErrorMessage = "*Username cannot be empty.")]
-        [Display(Name = "Username")]
         public string username { get; set; }
-        [Required(ErrorMessage = "*Email cannot be empty.")]
-        [Display(Name = "Email")]
         public string email { get; set; }
-        [Required(ErrorMessage = "*Password cannot be empty.")]
-        [Display(Name = "Password")]
         public string password { get; set; }
-        [Display(Name = "First Name")]
         public string first_name { get; set; }
-        [Display(Name = "Last Name")]
         public string last_name { get; set; }
-        [Required(ErrorMessage = "*Confirm Password cannot be empty.")]
-        [Compare("password", ErrorMessage = "*Password doesn't match.")]
-        [Display(Name = "Confirm Password")]
         public string con_pass { get; set; }
-        [Display(Name = "Upload Image")]
         public string image_data { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

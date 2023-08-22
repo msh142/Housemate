@@ -1,0 +1,43 @@
+﻿@model Housemate.Models.BuyHistory
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BuyHistory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.purchase_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.purchase_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerInfo.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerInfo.username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.history_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -98,12 +98,6 @@
                             @Html.ActionLink("Add New Admin", "Create", "Admins", new { area = "" }, new { @class = "btn btn-info navbtn", @style = "color:white;" })
                         </li>
                     }
-                    @if (Request.Cookies["AdminUsername"] != null)
-                    {
-                        <li style="padding-top: 5px; padding-right: 5px;" class="text-white">
-                            @Html.ActionLink(" ", "Edit", new { id = int.Parse(Request.Cookies["AdminID"].Value) }, new { @class = "btn btn-warning glyphicon glyphicon-user navbtn", @style = "color:white;" })
-                        </li>
-                    }
 
                     @if (Request.Cookies["AdminUsername"] != null)
                     {

@@ -6,63 +6,108 @@
     {
         Layout = "~/Views/Shared/AdminLayout.cshtml";
     }
-    else if(Request.Cookies["CustomerID"] != null)
+    else if (Request.Cookies["CustomerID"] != null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 }
+<div style="margin-top:30px">
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.order_status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.feedback)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.order_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustomerInfo.username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cart.cart_id)
-        </th>
-        <th></th>
-    </tr>
-    @if (Model != null)
-    {
-        foreach (var item in Model)
+</div>
+@if (Request.Cookies["CustomerID"] != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.order_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.order_status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.feedback)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.order_date)
+            </th>
+            <th></th>
+        </tr>
+        @if (Model != null)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.order_status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.feedback)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.order_date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CustomerInfo.username)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cart.cart_id)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.order_id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.order_id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.order_id })
-                </td>
-            </tr>
-        }
-    }
 
-</table>
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.order_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.order_status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.feedback)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.order_date)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Cancel Order", "CancelOrder","Orders", new { id = item.order_id }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+}
+@if (Request.Cookies["AdminID"] != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.order_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.order_status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.feedback)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.order_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.customer_id)
+            </th>
+            <th></th>
+        </tr>
+        @if (Model != null)
+        {
+
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.order_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.order_status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.feedback)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.order_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.customer_id)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Proceed", "Details", new { id = item.order_id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.order_id }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+}

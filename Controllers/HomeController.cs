@@ -64,16 +64,9 @@ namespace Housemate.Controllers
             if(Request.Cookies["CustomerID"] != null)
             {
                 Cart cart = db.Carts.FirstOrDefault(c => c.customer_id == customer.customer_id);
-                HttpCookie hc  = new HttpCookie("CartID", cart.cart_id.ToString()); ;
-                Response.Cookies.Add(hc);
-                
                 if (cart == null)
                 {
                     Cart newCart = new Cart();
-                    HttpCookie cookie = Request.Cookies["CartID"];
-                    cookie.Value = newCart.cart_id.ToString();
-                    Response.Cookies.Set(cookie);
-                    System.Diagnostics.Debug.WriteLine(customer.customer_id);
                     newCart.customer_id = customer.customer_id;
                     newCart.price = 0;
                     db.Carts.Add(newCart);
@@ -85,7 +78,7 @@ namespace Housemate.Controllers
                         newCarR.product_id = product.product_id;
                         newCarR.cart_id = newCart.cart_id;
                         newCarR.quantity = 1;
-                        newCarR.status = "PendingPayment";
+                        newCarR.status = "Pending";
                         newCarR.price = product.price;
                         db.CartRecords.Add(newCarR);
                         db.SaveChanges();
@@ -104,9 +97,6 @@ namespace Housemate.Controllers
                 else
                 {
                     CartRecord carR = db.CartRecords.Where(c => (c.cart_id == cart.cart_id) && (c.product_id == product.product_id) && (c.status.Contains("Pending"))).SingleOrDefault();
-                    HttpCookie cookie = Request.Cookies["CartID"];
-                    cookie.Value = cart.cart_id.ToString();
-                    Response.Cookies.Set(cookie);
                     if (carR == null)
                     {
                         CartRecord newCarR = new CartRecord();
@@ -114,7 +104,7 @@ namespace Housemate.Controllers
                         newCarR.cart_id = cart.cart_id;
                         newCarR.quantity = 1;
                         newCarR.price = product.price;
-                        newCarR.status = "PendingPayment";
+                        newCarR.status = "Pending";
                         db.CartRecords.Add(newCarR);
                         db.SaveChanges();
                     }

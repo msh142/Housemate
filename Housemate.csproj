@@ -160,6 +160,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
+    <Compile Include="Controllers\BuyHistoriesController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CheckoutsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -379,6 +380,11 @@
     <Content Include="Views\UserAccount\ShowError.cshtml" />
     <Content Include="Views\Admins\ShowError.cshtml" />
     <Content Include="Views\Home\CategoryView.cshtml" />
+    <Content Include="Views\BuyHistories\Create.cshtml" />
+    <Content Include="Views\BuyHistories\Delete.cshtml" />
+    <Content Include="Views\BuyHistories\Details.cshtml" />
+    <Content Include="Views\BuyHistories\Edit.cshtml" />
+    <Content Include="Views\BuyHistories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

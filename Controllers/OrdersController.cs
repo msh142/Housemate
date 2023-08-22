@@ -17,7 +17,18 @@ namespace Housemate.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View();
+            
+            if (Request.Cookies["AdminID"] != null)
+            {
+                return View(db.Orders.ToList());
+            }
+            if (Request.Cookies["CustomerID"] != null)
+            {
+                int cus_id = Convert.ToInt32(Request.Cookies["CustomerID"].Value);
+                IEnumerable<Order> order = db.Orders.Where(c => c.customer_id == cus_id && c.order_status != "Cancelled").ToList();
+                return View(order.ToList());
+            }
+            return View("AllOrders");
         }
         public ActionResult CustomerView()
         {
@@ -27,19 +38,41 @@ namespace Housemate.Controllers
         }
         public ActionResult PendingOrder()
         {
-            var orders = db.Orders.Where(c => c.order_status.Contains("Paid") || c.order_status.Contains("COD"));
-            return View("Index", orders.ToList());
+            if (Request.Cookies["AdminID"] != null)
+            {
+                return View("Index", db.Orders.Where(c => c.order_status.Contains("Paid") || c.order_status.Contains("COD")).ToList());
+            }
+            if (Request.Cookies["CustomerID"] != null)
+            {
+                int cus_id = Convert.ToInt32(Request.Cookies["CustomerID"].Value);
+                IEnumerable<Order> order = db.Orders.Where(c => c.customer_id == cus_id && (c.order_status.Contains("Paid") || c.order_status.Contains("COD"))).ToList();
+                return View("Index", order);
+            }
+            return View("Index");
         }
 
         public ActionResult ConfirmedOrder()
         {
-            var orders = db.Orders.Where(c => c.order_status.Contains("Confirmed"));
-            return View("Index", orders.ToList());
+            if (Request.Cookies["AdminID"] != null)
+            {
+                return View("Index", db.Orders.Where(c => c.order_status.Contains("Confirmed")).ToList());
+            }
+            if (Request.Cookies["CustomerID"] != null)
+            {
+                int cus_id = Convert.ToInt32(Request.Cookies["CustomerID"].Value);
+                IEnumerable<Order> order = db.Orders.Where(c => c.customer_id == cus_id && c.order_status.Contains("Confirmed")).ToList();
+                return View("Index", order);
+            }
+            return View("Index");
         }
+
         public ActionResult RejectedOrder()
         {
-            var orders = db.Orders.Where(c => c.order_status.Contains("Rejected"));
-            return View("Index", orders.ToList());
+            return View("Index", db.Orders.Where(c => c.order_status.Contains("Rejected")).ToList());
+        }
+        public ActionResult CancelledOrder()
+        {
+            return View("Index", db.Orders.Where(c => c.order_status.Contains("Cancelled")).ToList());
         }
         public ActionResult AllOrders()
         {
@@ -47,7 +80,22 @@ namespace Housemate.Controllers
             return View("Index", orders.ToList());
         }
 
-
+        public ActionResult ConfirmOrder(int? id)
+        {
+            Order order = db.Orders.Find(id);
+            order.order_status = "Delivering";
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
+            return View("Index");
+        }
+        public ActionResult RejectOrder(int? id)
+        {
+            Order order = db.Orders.Find(id);
+            order.order_status = "Rejected";
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
+            return View("Index");
+        }
         // GET: Orders/Details/5
         public ActionResult Details(int? id)
         {
@@ -56,13 +104,28 @@ namespace Housemate.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Order order = db.Orders.Find(id);
+            ViewBag.customerin = db.CustomerInfoes.Where(c => c.customer_id == order.customer_id).SingleOrDefault();
+            List<CartRecord> carR = db.CartRecords.Where(c => c.cart_id == order.cart_id && c.status == "Processing" && c.order_id == order.order_id).ToList();
+            ViewBag.carR = carR;
             if (order == null)
             {
                 return HttpNotFound();
             }
             return View(order);
         }
+        public ActionResult CancelOrder(int? id)
+        {
+            Order order = db.Orders.Find(id);
+            order.order_status = "Cancelled";
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
+        public ActionResult OrderResponse(string response)
+        {
+            return RedirectToAction("Index");
+        }
         // GET: Orders/Create
         public ActionResult Create()
         {

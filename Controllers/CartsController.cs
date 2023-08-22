@@ -22,13 +22,23 @@ namespace Housemate.Controllers
             {
                 string customerIDValue = Request.Cookies["CustomerID"].Value;
                 customerID = Convert.ToInt32(customerIDValue);
+                Cart cart = db.Carts.FirstOrDefault(c => c.customer_id == customerID);
+                if (cart == null)
+                {
+                    Cart newCart = new Cart();
+                    newCart.customer_id = customerID;
+                    newCart.price = 0;
+                    db.Carts.Add(newCart);
+                    db.SaveChanges();
+                }
 
                 Cart carts = (from c in db.Carts
                               where (c.customer_id == customerID)
                               select c).SingleOrDefault();
                 var carR = from c in db.CartRecords
-                           where (c.cart_id == carts.cart_id) && (c.status == "PendingPayment")
+                           where (c.cart_id == carts.cart_id) && (c.status == "Pending")
                            select c;
+                
                 if (!carR.Any())
                 {
                     carts.price = Convert.ToDecimal(0);
@@ -107,8 +117,7 @@ namespace Housemate.Controllers
                 // Update the quantity column
                 cartItem.quantity = quantity;
                 cartItem.price = product.price.Value * quantity;
-                cartItem.status = "PendingPayment";
-                System.Diagnostics.Debug.WriteLine("\n\nQuantity " + quantity + "\n\n");
+                cartItem.status = "Pending";
                 // Save changes to the database
                 db.SaveChanges();
             }

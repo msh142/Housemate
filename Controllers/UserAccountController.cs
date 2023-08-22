@@ -161,6 +161,10 @@ namespace Housemate.Controllers
 
         public ActionResult Login()
         {
+            if(Request.Cookies["CustomerID"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         public static string GenerateRandomString(int length)
@@ -248,7 +252,7 @@ namespace Housemate.Controllers
                 db.CustomerLogins.Add(cus_l);
                 //db.SaveChanges();
 
-
+                ViewBag.Clogin = true;
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -267,13 +271,16 @@ namespace Housemate.Controllers
         {
             HttpCookie rc = Request.Cookies["CustomerEmail"];
             HttpCookie rc1 = Request.Cookies["CustomerUsername"];
+            HttpCookie rc2 = Request.Cookies["CustomerID"];
 
-            rc.Expires = DateTime.Now.AddSeconds(-1);
+            rc2.Expires = DateTime.Now.AddSeconds(-1);
             Response.Cookies.Add(rc);
-            if (rc1 != null)
+            if (rc2 != null)
             {
                 rc1.Expires = DateTime.Now.AddSeconds(-1);
                 Response.Cookies.Add(rc1);
+                rc.Expires = DateTime.Now.AddSeconds(-1);
+                Response.Cookies.Add(rc);
             }
             
             FormsAuthentication.SignOut();

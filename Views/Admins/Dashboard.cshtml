@@ -5,22 +5,26 @@
 }
 
 <h2>Dashboard</h2>
-<script>
-    let successAlertShown = false;
-    function showSuccessAlert() {
-        Swal.fire({
-            icon: 'success',
-            title: 'Login Successful!',
-            text: 'You have successfully logged in.',
-            confirmButtonText: 'OK',
-            showConfirmButton: false,
-            timer: 3000
-        });
-    }
-    window.onload = () => {
-        showSuccessAlert();
-        successAlertShown = true;
-    };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+@if (Request.Cookies["AdminID"] != null && ViewBag.Alogin == true)
+{
+    <script>
+        let successAlertShown = false;
+        function showSuccessAlert() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successful!',
+                text: 'You have successfully logged in.',
+                confirmButtonText: 'OK',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        }
+        window.onload = () => {
+            showSuccessAlert();
+            successAlertShown = true;
+        };
+    </script>
+    ViewBag.Alogin = false;
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+}
 

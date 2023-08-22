@@ -78,7 +78,7 @@ namespace Housemate.Controllers
             ShippingAddress shippingAddress = db.ShippingAddresses.Find(id);
             if (shippingAddress == null)
             {
-                return HttpNotFound();
+                return View("Create");
             }
             ViewBag.customer_id = new SelectList(db.CustomerInfoes, "customer_id", "username", shippingAddress.customer_id);
             return View(shippingAddress);
